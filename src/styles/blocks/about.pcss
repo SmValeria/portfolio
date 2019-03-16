@@ -1,0 +1,63 @@
+.about__container {
+  padding: 10% 7%;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.about__left {
+  flex-basis: 40%;
+  margin-right: 5%;
+}
+
+.about__right {
+  flex-basis: 55%;
+}
+
+.about__user-photo-wr {
+  max-width: 200px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 50px;
+}
+
+.about__user-photo {
+  filter: drop-shadow(5px 10px 20px rgba($text-color, 0.5));
+}
+
+.about__hello {
+  margin-bottom: 20px;
+}
+
+.about__title {
+  margin-bottom: 35px;
+}
+
+.about__desc {
+  margin-bottom: 82px;
+}
+.about__hello,
+.about__desc,
+.about__note {
+  color: rgba($text-color, 0.5);
+}
+
+.about__note {
+  font-style: italic;
+  position: relative;
+
+  &::before {
+    content: "*";
+    display: flex;
+    position: absolute;
+    color: rgba(#ff0000, 0.1);
+    font-size: 48px;
+    font-style: italic;
+    transform: translateX(-100%);
+    line-height: 0;
+    top: 20px;
+    left: -25px;
+  }
+}

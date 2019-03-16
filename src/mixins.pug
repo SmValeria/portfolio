@@ -1,7 +1,28 @@
 mixin icon(name, className)
-  - var icon = require(`images/icons/${name}.svg`);
-  svg(class=className viewBox=icon.viewBox preserveAspectRatio="none")
-    use(xlink:href=icon.url)
+    - var icon = require(`images/icons/${name}.svg`);
+    svg(class=className viewBox=icon.viewBox preserveAspectRatio="none")
+        use(xlink:href=icon.url)
 
 mixin image(path, className)
-  img(src=require(`images/${path}`) class=className)
+    img(src=require(`images/${path}`) class=className)
+
+
+mixin bgImage(path)
+    - var bg = `background-image: url( (~images/${path}))`
+    bg
+
+mixin nav(className, arr)
+    nav(class=`${className}`)
+        ul(class=`${className}__list`)
+            each item in arr
+                li(class=`${className}__item`)
+                    a(href=item.link class=`${className}__link`)=item.title
+
+mixin socials(className, arr)
+    div(class=`${className}`)
+        ul(class=`${className}__list`)
+            each icon in arr
+                li(class=`${className}__item`)
+                    a(href=icon.link class=`${className}__link`)
+                        +icon(icon.title, `${className}__icon ${className}__icon--${icon.title}`)
+                        span.hidden=icon
