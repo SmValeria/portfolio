@@ -7,18 +7,35 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 40px;
+  margin-right: 15px;
+  flex-shrink: 0;
+  padding: 12.5Px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  transition: border-color 0.2s;
   &:last-of-type {
     margin-right: 0;
   }
-}
-
-.social__link {
-  display: flex;
 }
 
 .social__icon {
   fill: $text-color;
   width: 25px;
   height: 25px;
+  transition: fill 0.2s;
+}
+
+.social--footer {
+  .social__item {
+    border-color: $text-color;
+    &:hover {
+      border-color: $main-color;
+    }
+  }
+}
+
+.social__item:hover {
+  .social__icon {
+    fill: $main-color;
+  }
 }

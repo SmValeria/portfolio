@@ -1,14 +1,42 @@
+.progress {
+    display: flex;
+    flex-direction: row;
+    margin: 0 -15px;
+}
+
+.progress__item {
+    max-width: 200px;
+    width: 100%;
+    position: relative;
+    margin: 0 15px 10px;
+}
+
+.progress__shape {
+    width: 100%;
+}
+
 .progress__circle {
     fill: transparent;
-
 }
 
 .progress__circle-under {
-    stroke-width: 10;
+    stroke-width: 7;
     stroke: #eaeaea;
 }
 
 .progress__circle-above {
-    stroke-width: 20;
+    stroke-width: 15;
     stroke-dasharray: 286;
+}
+
+.progress__title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    transform: translate(-50%, -50%);
+    color: rgba($text-color, 0.5);
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
 }

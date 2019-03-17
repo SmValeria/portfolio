@@ -1,4 +1,159 @@
+-
+    var menu = [
+        {
+            title: "Главная",
+            link: "#"
+        },
+        {
+            title: "Обо мне",
+            link: "#"
+        },
+        {
+            title: "Навыки",
+            link: "#"
+        },
+        {
+            title: "Работы",
+            link: "#"
+        },
+        {
+            title: "Отзывы",
+            link: "#"
+        },
+        {
+            title: "Связаться",
+            link: "#"
+        }
+    ]
+
+-
+    var socials = [
+        {
+            title: "insta",
+            link: "#"
+        },
+        {
+            title: "vk",
+            link: "#"
+        },
+        {
+            title: "github",
+            link: "#"
+        }
+    ]
+
+-
+    var skills = [
+        [
+            'Front-end',
+            [
+                {
+                    title: "HTML5",
+                    progress: 230
+                },
+                {
+                    title: "CSS3",
+                    progress: 230
+                },
+                {
+                    title: "Javascript",
+                    progress: 260
+                },
+                {
+                    title: "Jquery и Vue.js",
+                    progress: 260
+                }
+            ]
+        ],
+        [
+            'Workflow',
+            [
+                {
+                    title: "GIT",
+                    progress: 220
+                },
+                {
+                    title: "Terminal",
+                    progress: 220
+                },
+                {
+                    title: "Gulp",
+                    progress: 260
+                },
+                {
+                    title: "Webpack",
+                    progress: 270
+                }
+            ]
+        ]
+    ]
+
+-
+    var workSlider = [
+        {
+            path: 'preview/1.jpg',
+            link: '#',
+            skills: [],
+            title: '',
+            text: ''
+        },
+        {
+            path: 'preview/2.jpg',
+            link: '#',
+            skills: [],
+            title: '',
+            text: ''
+        },
+        {
+            path: 'preview/3.jpg',
+            link: '#',
+            skills: [],
+            title: '',
+            text: ''
+        },
+        {
+            path: 'preview/4.jpg',
+            link: '#',
+            skills: [],
+            title: '',
+            text: ''
+        },
+        {
+            path: 'preview/5.jpg',
+            link: '#',
+            skills: [],
+            title: '',
+            text: ''
+        }
+    ]
+
+-
+    var reviewsSlider = [
+        {
+            name: "Ковальчук Дмитрий",
+            occupation: "Основатель Loftschool",
+            quote: "Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!",
+            photo: "o8CzkPF3Ai8.jpg"
+        },
+        {
+            name: "Владимир Сабанцев",
+            occupation: "Преподаватель",
+            quote: "Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах",
+            photo: "Di51WMRvTek.jpg"
+        }
+    ]
+
 include ./mixins.pug
+
+include ./components/nav
+include ./components/socials
+include ./components/progress
+include ./components/decoration
+include ./components/gallery-slider
+include ./components/tags
+include ./components/controls
+include ./components/carousel
+include ./components/form
 
 
 <!DOCTYPE html>
@@ -15,21 +170,62 @@ html(lang="en")
                 style=`background-image: url('${require('./images/content/hero_bg.jpg')}')`)
                     section.hero.fullscreen-section
                         .container.hero__container
-                            include ./sections/header
-                            include ./sections/main-info
-                            include ./sections/scroll-down
+                            header.hero__header.header
+                                div(class=`header__logo`)
+                                    .logo
+                                        a.logo__link(href="#") BA
+                                +nav(`header`, menu)
+                                +socials(`header`, socials)
+                            .hero__content
+                                include ./sections/main-info
+                            .hero__scroll-down
+                                include ./sections/scroll-down
                     section.about
                         .container.about__container
                             include ./sections/about
-                    .decoration
-                        svg.decoration__item.decoration__item--left(viewBox="0 0 1000 100" preserveAspectRatio="none")
-                            polygon(
-                            points="0,0 0,100 1000,100"
-                            )
-                        svg.decoration__item.decoration__item--right(viewBox="0 0 1000 100" preserveAspectRatio="none")
-                            polygon(
-                            points="0,100 1000,100 1000,0"
-                            )
-                section.skills
-                    .container.skills__container
-                        include ./sections/skills
+                    +decoration('bottom')
+
+                section.experience
+                    .container.experience__container
+                        +image('content/bag.png', 'experience__bg-img')
+                        include ./sections/experience
+                        +progress('experience', skills)
+                section.work
+                    .container.work__container
+                        h2.title.work__title Мои работы
+                        .work__content
+                            .work__left
+                                .work__index
+                                    .index 4
+                                +gallery-slider('work__slider', workSlider, 62, 0)
+                            .work__right
+                                .work__describe
+                                    +tag('work__skills', ['HTML', 'CSS', 'Javascript'])
+                                    .work__title.subtitle Сайт школы образования
+                                    .work__desc
+                                        p Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 2 месяца только самых тяжелых испытаний и бессонных ночей!
+                                    .work__link
+                                        +icon('link', 'work__link-icon')
+                                        a.work__ref(href="#") Посмотреть сайт
+                .contacts-section(
+                style=`background-image: url('${require('./images/content/budda.jpg')}')`)
+                    +decoration('top')
+                    section.reviews
+                        .container.reviews__container
+                            .reviews__top
+                                h2.title.reviews__title Что обо мне говорят
+                                +controls('reviews__controls round horizontal')
+                            +carousel('reviews__carousel', reviewsSlider)
+                    section.contacts
+                        .container.contacts__container
+                            h2.title.contacts__title Связаться со мной
+                            +form('contacts__form form')
+                footer.footer
+                    .container.footer__container
+                        .footer__copyright
+                            include ./sections/copyright
+                        .footer__main
+                            +nav('footer', menu)
+                            include ./sections/footer-columns
+
+

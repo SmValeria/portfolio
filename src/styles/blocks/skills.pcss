@@ -1,6 +1,18 @@
-.skills__container {
-    background-image: url('~images/content/bag.png');
-    background-repeat: no-repeat;
-    background-position: left bottom;
-    background-size: auto 80%;
+.skills__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.skills__title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 40px;
+}
+
+.skills__item {
+    margin-bottom: 50px;
+    &:last-of-type {
+        margin-bottom: 0;
+    }
 }

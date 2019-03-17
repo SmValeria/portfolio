@@ -1,0 +1,24 @@
+mixin gallery-slider(className, arr, ratio, active)
+    - if (!ratio) ratio=100
+    div.gallery-slider(class=className)
+        .gallery-slider__content
+            ul.gallery-slider__list(style=`padding-top: ${ratio}%`)
+                each slide, ndx in arr
+                    if ndx === active
+                        li.gallery-slider__item.active
+                            +image(slide.path, 'gallery-slider__img')
+                    else
+                        li.gallery-slider__item
+                            +image(slide.path, 'gallery-slider__img')
+            ul.gallery-slider__nav-list
+                each slide, ndx in arr
+                    if ndx === active
+                        li.gallery-slider__nav-item.active
+                            a(href="#").gallery-slider__nav-link
+                                +image(slide.path, 'gallery-slider__nav-img')
+                    else
+                        li.gallery-slider__nav-item
+                            a(href="#").gallery-slider__nav-link
+                                +image(slide.path, 'gallery-slider__nav-img')
+        +controls('gallery-slider__controls square vertical')
+

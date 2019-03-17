@@ -1,0 +1,22 @@
+mixin progress(className, progressArr)
+    div(class=`skills ${className}__skills`)
+        ul(class=`skills__list`)
+            each progress in progressArr
+                li(class=`skills__item`)
+                    div(class=`skills__item-container`)
+                        h4(class=`skills__title`)=progress[0]
+                        ul(class=`progress`)
+                            each item in progress[1]
+                                li(class="progress__item")
+                                    svg(viewBox="0 0 100 100" class="progress__shape" preserveAspectRatio="none")
+                                        defs
+                                            lineargradient#gradient(x1='0', y1='0', x2='0', y2='100%')
+                                                stop(offset='0%', stop-color='#5500f2')
+                                                stop(offset='100%', stop-color='#ad00ed')
+                                        circle(r="40" cx="50" cy="50").progress__circle.progress__circle-under
+                                        circle(r="40" cx="50" cy="50"
+                                        stroke="url(#gradient)"
+                                        transform="rotate(-180 50 50)"
+                                        stroke-dashoffset=`${item.progress}`).progress__circle.progress__circle-above
+
+                                    span.progress__title #{item.title}

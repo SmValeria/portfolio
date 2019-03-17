@@ -1,0 +1,33 @@
+mixin form(className)
+    div(class=className)
+        form.form__container(action="" method="")
+            .form__row
+                .form__block.form__el
+                    label.form__title(for="name") Введите ваше имя
+                    .form__input-wr
+                        +icon('user', 'form__icon')
+                        input.form__input#name(name="name"
+                        type="text"
+                        required
+                        placeholder="Ковальчук Дмитрий")
+                .form__block.form__el
+                    label.form__title(for="email") Введите ваш email
+                    .form__input-wr
+                        +icon('envelope', 'form__icon')
+                        input.form__input#email(name="email"
+                        type="email"
+                        required
+                        placeholder="loftschool@study.com")
+            .form__row
+                .form__block.form__el
+                    label.form__title(for="message") Сообщение к письму
+                    .form__input-wr
+                        +icon('message', 'form__icon')
+                        textarea.form__input.form__textarea#message(
+                        name="message"
+                        type="text"
+                        required
+                        rows="2"
+                        placeholder="Требуется ваша помощь в создании сайта.\n" +
+                        "Интересуют сроки и цена вопроса")
+            button.form__submit.form__el(type="submit") Отправить

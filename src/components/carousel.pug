@@ -1,0 +1,14 @@
+mixin carousel(className,arr)
+    .carousel(class=className)
+        ul.carousel__list
+            each review in arr
+                li.carousel__item.quote
+                    .carousel__text=review.quote
+                    .carousel__desc.user
+                        .user__photo-wr.carousel__user-photo-wr
+                            .user__photo.carousel__user-photo(
+                            style=`background-image: url('${require(`images/content/${review.photo}`)
+                            }');background-position: center top;`)                        )
+                        .carousel__info
+                            .user__name.carousel__author=review.name
+                            .user__occ.carousel__occ=review.occupation
