@@ -2,27 +2,27 @@
     var menu = [
         {
             title: "Главная",
-            link: "#"
+            link: "#hero"
         },
         {
             title: "Обо мне",
-            link: "#"
+            link: "#about"
         },
         {
             title: "Навыки",
-            link: "#"
+            link: "#experience"
         },
         {
             title: "Работы",
-            link: "#"
+            link: "#work"
         },
         {
             title: "Отзывы",
-            link: "#"
+            link: "#reviews"
         },
         {
             title: "Связаться",
-            link: "#"
+            link: "#contacts"
         }
     ]
 
@@ -133,13 +133,13 @@
             name: "Ковальчук Дмитрий",
             occupation: "Основатель Loftschool",
             quote: "Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!",
-            photo: "o8CzkPF3Ai8.jpg"
+            photo: "kovalchuk.jpg"
         },
         {
             name: "Владимир Сабанцев",
             occupation: "Преподаватель",
             quote: "Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах",
-            photo: "Di51WMRvTek.jpg"
+            photo: "sabancev.jpg"
         }
     ]
 
@@ -154,6 +154,7 @@ include ./components/tags
 include ./components/controls
 include ./components/carousel
 include ./components/form
+include ./components/scroll-down
 
 
 <!DOCTYPE html>
@@ -163,34 +164,36 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
         title Portfolio | main page
+        link(rel="shortcut icon" href=require(`images/favicon.png`))
     body
         .wrapper
             .maincontent
                 .welcome-section(
                 style=`background-image: url('${require('./images/content/hero_bg.jpg')}')`)
-                    section.hero.fullscreen-section
+                    section.hero.fullscreen-section.section#hero
                         .container.hero__container
                             header.hero__header.header
-                                div(class=`header__logo`)
-                                    .logo
-                                        a.logo__link(href="#") BA
-                                +nav(`header`, menu)
-                                +socials(`header`, socials)
+                                .container.header__container
+                                    div(class=`header__logo`)
+                                        .logo
+                                            a.logo__link(href="#") SmV
+                                    +nav(`header`, menu)
+                                    +socials(`header`, socials)
                             .hero__content
                                 include ./sections/main-info
                             .hero__scroll-down
-                                include ./sections/scroll-down
-                    section.about
+                                +scroll-down('about')
+                    section.about.section#about
                         .container.about__container
                             include ./sections/about
-                    +decoration('bottom')
+                        +decoration('bottom')
 
-                section.experience
+                section.experience.section#experience
                     .container.experience__container
                         +image('content/bag.png', 'experience__bg-img')
                         include ./sections/experience
                         +progress('experience', skills)
-                section.work
+                section.work.section#work
                     .container.work__container
                         h2.title.work__title Мои работы
                         .work__content
@@ -209,18 +212,18 @@ html(lang="en")
                                         a.work__ref(href="#") Посмотреть сайт
                 .contacts-section(
                 style=`background-image: url('${require('./images/content/budda.jpg')}')`)
-                    +decoration('top')
-                    section.reviews
+                    section.reviews.section#reviews
+                        +decoration('top')
                         .container.reviews__container
                             .reviews__top
                                 h2.title.reviews__title Что обо мне говорят
                                 +controls('reviews__controls round horizontal')
                             +carousel('reviews__carousel', reviewsSlider)
-                    section.contacts
+                    section.contacts.section#contacts
                         .container.contacts__container
                             h2.title.contacts__title Связаться со мной
                             +form('contacts__form form')
-                footer.footer
+                footer.footer#footer
                     .container.footer__container
                         .footer__copyright
                             include ./sections/copyright

@@ -1,13 +1,31 @@
 .header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 110px;
+  z-index: 10;
+  background-color: rgba($text-color-light, 0);
+  transition: background-color 0.3s;
+
+  &--sticky {
+    top: 0;
+    background-color: rgba($text-color-light, 1);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+  }
+}
+.header__container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 100%;
 }
 
 .header__menu {
   flex-grow: 1;
   margin-left: 20px;
   margin-right: 20px;
+  height: 100%;
   display: flex;
   justify-content: center;
 }

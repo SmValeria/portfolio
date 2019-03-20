@@ -3,4 +3,4 @@ mixin nav(className, arr)
         ul(class=`menu__list`)
             each item in arr
                 li(class=`menu__item`)
-                    a(href=item.link class=`menu__link`)=item.title
+                    a(href=item.link class=`menu__link` data-scroll-to=`${item.link}`)=item.title
