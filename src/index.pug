@@ -132,7 +132,7 @@
         {
             name: "Ковальчук Дмитрий",
             occupation: "Основатель Loftschool",
-            quote: "Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!",
+            quote: `Эта девушка проходила обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!`,
             photo: "kovalchuk.jpg"
         },
         {
@@ -183,33 +183,9 @@ html(lang="en")
                                 include ./sections/main-info
                             .hero__scroll-down
                                 +scroll-down('about')
-                    section.about.section#about
-                        .container.about__container
-                            include ./sections/about
-                        +decoration('bottom')
-
-                section.experience.section#experience
-                    .container.experience__container
-                        +image('content/bag.png', 'experience__bg-img')
-                        include ./sections/experience
-                        +progress('experience', skills)
-                section.work.section#work
-                    .container.work__container
-                        h2.title.work__title Мои работы
-                        .work__content
-                            .work__left
-                                .work__index
-                                    .index 4
-                                +gallery-slider('work__slider', workSlider, 62, 0)
-                            .work__right
-                                .work__describe
-                                    +tag('work__skills', ['HTML', 'CSS', 'Javascript'])
-                                    .work__title.subtitle Сайт школы образования
-                                    .work__desc
-                                        p Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 2 месяца только самых тяжелых испытаний и бессонных ночей!
-                                    .work__link
-                                        +icon('link', 'work__link-icon')
-                                        a.work__ref(href="#") Посмотреть сайт
+                    include ./sections/about
+                include ./sections/experience
+                include ./sections/work
                 .contacts-section(
                 style=`background-image: url('${require('./images/content/budda.jpg')}')`)
                     section.reviews.section#reviews
@@ -223,12 +199,6 @@ html(lang="en")
                         .container.contacts__container
                             h2.title.contacts__title Связаться со мной
                             +form('contacts__form form')
-                footer.footer#footer
-                    .container.footer__container
-                        .footer__copyright
-                            include ./sections/copyright
-                        .footer__main
-                            +nav('footer', menu)
-                            include ./sections/footer-columns
+                include ./sections/footer
 
 

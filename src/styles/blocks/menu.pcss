@@ -40,3 +40,16 @@
 .header--sticky .menu__item.active::after {
     width: 100%;
 }
+
+.menu--footer {
+    .menu__item {
+        justify-content: flex-start;
+    }
+
+    .menu__list {
+        @include desktop {
+            flex-wrap: wrap;
+        }
+    }
+}
+

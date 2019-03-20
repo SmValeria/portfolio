@@ -1,26 +1,30 @@
 -
     var aboutData = {
-        "Проживаю": "Новосибирск",
-        "Возраст": "27 лет",
-        "Родился": "1 января 1991"
+        "Проживаю": "Краматорск",
+        "Возраст": "28 лет",
+        "Родился": "14 июня 1990"
     }
 
 
 
-
-.about__left
-    .user
-        .user__photo-wr.about__user-photo-wr
-            .user__photo.about__user-photo(
-            style=`background-image: url('${require('images/content/user.jpg')}')`)
-        table.user__info
-            each val, key in aboutData
-                tr.user__info-row
-                    td.user__info-title.user__info-data=key + ':'
-                    td.user__info-value.user__info-data=val
-.about__right
-    .about__hello Привет, меня зовут
-    h2.about__title Владимир Астаханов
-    .about__desc
-        p Я занимаюсь разработкой современных сайтов и приложений. Мне нравится делать интересные и современные проекты.
-    .about__note Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!
+section.about.section#about
+    .container.about__container
+        .about__left
+            .user
+                .user__photo-wr.about__user-photo-wr
+                    .user__photo.about__user-photo(
+                    style=`background-image: url('${require('images/content/user.jpg')}')`)
+                table.user__info
+                    each val, key in aboutData
+                        tr.user__info-row
+                            td.user__info-title.user__info-data=key + ':'
+                            td.user__info-value.user__info-data=val
+        .about__right
+            .about__hello Привет, меня зовут
+            h2.about__title Валерия Смирнова
+            .about__desc
+                p Я занимаюсь разработкой современных сайтов и приложений. Мне нравится делать интересные и современные проекты.
+            .about__note Этот сайт я сделала в рамках обучения в Школе онлайн образования
+                | LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут
+                | всё классно и красиво!
+    +decoration('bottom')
