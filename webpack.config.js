@@ -9,7 +9,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = (env, argv) => {
   const isProductionBuild = argv.mode === "production";
-  const publicPath = 'smvaleria.github.io/portfolio/';
+  const publicPath = 'https://smvaleria.github.io/portfolio/';
 
   const pcss = {
     test: /\.(p|post|)css$/,
@@ -89,7 +89,7 @@ module.exports = (env, argv) => {
       admin: "./src/admin/main.js"
     },
     output: {
-      path: path.resolve(__dirname, "./dist"),
+      path: path.resolve(__dirname, "./docs"),
       filename: "[name].[hash].build.js",
       publicPath: isProductionBuild ? publicPath : "",
       chunkFilename: "[chunkhash].js"
