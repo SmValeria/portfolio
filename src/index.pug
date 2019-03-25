@@ -80,8 +80,6 @@ html(lang="en")
     body
         .wrapper
             .maincontent
-                //- .welcome-section(
-                //- style=`background-image: url('${require('./images/content/hero_bg.jpg')}')`)
                 .welcome-section
                     include ./sections/hero-parallax
                     section.hero.fullscreen-section.section#hero
@@ -104,8 +102,10 @@ html(lang="en")
                     .container.work__container
                         h2.title.work__title Мои работы
                         #slider-component
-                .contacts-section(
-                style=`background-image: url('${require('./images/content/budda.jpg')}')`)
+                //-.contacts-section(
+                //-style=`background-image: url('${require('./images/content/budda.jpg')}')`)
+                .contacts-section
+                    include ./sections/budda-parallax
                     section.reviews.section#reviews
                         +decoration('top')
                         .container.reviews__container

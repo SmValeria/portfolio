@@ -12,7 +12,8 @@ script(type="text/x-template")#slider-container
         )
 
 script(type="text/x-template")#slider-display
-    .work__appearance(:data-slide="currentIndex + 1")
+    .work__appearance(
+    :data-slide="currentIndex + 1")
         .gallery-slider.work__slider
             .gallery-slider__content
                 ul.gallery-slider__list

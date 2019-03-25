@@ -6,9 +6,9 @@
   "href-color": "#4b6fd7",
   "hover-color": "#5500f2",
   "links-color": "#4b6fd7",
-  "bp-desktop-hd": "1800px",
-  "bp-desktop": "1200px",
-  "bp-tablets": "768px",
-  "bp-phones": "480px",
-  "bp-phones-m": "320px"
+  "bp-desktop-hd": "1800Px",
+  "bp-desktop": "1200Px",
+  "bp-tablets": "768Px",
+  "bp-phones": "480Px",
+  "bp-phones-m": "320Px"
 }

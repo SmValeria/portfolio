@@ -82,11 +82,28 @@ new Vue({
     },
     watch: {
         currentIndex(value) {
-            this.makeInfiniteLoopForCurIndex(value);
+            this.makeLimitedLoopForCurIndex(value);
         }
     },
     methods: {
-        makeInfiniteLoopForCurIndex(value) {
+        reRenderThumbnails(index) {
+            const container = document.querySelector('.thumbnail');
+            const containerHeight = container.offsetHeight;
+            const list = container.querySelector('.thumbnail__list');
+            const itemHeight = list.querySelector('.thumbnail__item').offsetHeight;
+            const countVisibleItems =  (containerHeight / itemHeight) - 1;
+            console.log(itemHeight);
+            if (index === this.works.length) return;
+            if(index <= countVisibleItems) {
+                list.style.transform = `translateY(0px)`;
+                return
+            }
+            let offset = (index - countVisibleItems) * itemHeight;
+
+            list.style.transform = `translateY(${offset}px)`;
+
+        },
+        makeLimitedLoopForCurIndex(value) {
             const worksAmount = this.works.length - 1;
             if (value > worksAmount) this.currentIndex = worksAmount;
             if (value < 0) this.currentIndex = 0;
@@ -108,10 +125,11 @@ new Vue({
                     this.currentIndex--;
                     break;
             }
+
+            this.reRenderThumbnails(this.currentIndex);
         },
         setSlide(index) {
             this.currentIndex = index;
-            console.log(index)
         }
     },
     created() {

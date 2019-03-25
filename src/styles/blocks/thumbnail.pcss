@@ -1,14 +1,14 @@
 .thumbnail {
     position: absolute;
     width: 20%;
-    height: 80.5%;
+    height: 80%;
     bottom: 0;
     right: 0;
     overflow: hidden;
 
     @include desktop {
         width: 28%;
-        height: 84.5%;
+        height: 84%;
     }
     @include phones {
         display: none;
@@ -20,11 +20,18 @@
     flex-direction: column-reverse;
     position: absolute;
     bottom: 0;
+    height: 100%;
+    transition: transform 0.5s;
+    will-change: transform;
 }
 
 .thumbnail__item {
     position: relative;
     cursor: pointer;
+    height: 25%;
+    @include desktop {
+        height: calc(100% / 3);
+    }
     &.active {
         outline: 3px solid $main-color;
         outline-offset: -3px;
