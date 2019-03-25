@@ -1,17 +1,46 @@
 .main-info {
+  display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
+
+  @include desktop {
+    text-align: left;
+    flex-direction: row;
+  }
+
+  @include tablets {
+    text-align: center;
+    flex-direction: column;
+  }
 }
 
 .main-info__desc {
   color: rgba($text-color, 0.4);
   font-size: 18px;
   font-weight: 600;
+
+  @include desktop {
+    text-align: right;
+    position: relative;
+    top: 10px;
+    margin-right: 50px;
+  }
+
+  @include tablets {
+    text-align: inherit;
+    top: 0;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
 }
 
 .main-info__owner {
   font-size: 72px;
   font-weight: 800;
   line-height: 1;
+
+  @include phones {
+    font-size: 36Px;
+  }
 }

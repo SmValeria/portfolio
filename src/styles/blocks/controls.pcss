@@ -28,6 +28,9 @@
         .controls__item:hover {
             background-color: $main-color;
         }
+        .controls__item.disabled:hover {
+            background-color: #2d3c4e;
+        }
 
     }
 
@@ -44,18 +47,19 @@
     }
     &.vertical {
         .controls__icon {
-            fill: rgba(text-color-light, 0.3);
+            fill: rgba(text-color-light, 1);
 
         }
         .controls__item--prev .controls__icon {
-            transform: rotate(-90deg);
+            transform: rotate(90deg);
         }
 
         .controls__item--next .controls__icon {
-            transform: rotate(90deg);
+            transform: rotate(-90deg);
         }
-        .controls__link:hover .controls__icon {
-            fill: rgba(text-color-light, 1);
+
+        .controls__item.disabled .controls__icon {
+            fill: rgba(text-color-light, 0.3);
         }
     }
 

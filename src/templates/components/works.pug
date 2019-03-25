@@ -1,0 +1,80 @@
+script(type="text/x-template")#slider-container
+    .work__content
+        display(
+            :works="works",
+            :currentWork="currentWork",
+            :currentIndex="currentIndex",
+            @slide="handleSlide",
+            @choose="setSlide"
+        )
+        info(
+            :currentWork="currentWork"
+        )
+
+script(type="text/x-template")#slider-display
+    .work__appearance(:data-slide="currentIndex + 1")
+        .gallery-slider.work__slider
+            .gallery-slider__content
+                ul.gallery-slider__list
+                    li.gallery-slider__item(
+                    v-for="work in works"
+                    :key="work.item"
+                    :class="{active: currentWork.id === work.id}")
+                        img(:src="work.path").gallery-slider__img
+                thumbs(
+                    :works="works",
+                    :currentWork="currentWork",
+                    @choose="index => $emit('choose', index)"
+                )
+            controls(
+                :currentIndex="currentIndex",
+                :currentWork="currentWork",
+                :lastIndexOfWorkArray="lastIndexOfWorkArray",
+                @slide="direction => $emit('slide', direction)"
+            )
+
+script(type="text/x-template")#slider-thumbs
+    .thumbnail
+        ul.thumbnail__list
+            li.thumbnail__item(
+            v-for="(work, ndx) in works"
+            :key="work.id"
+            :class="{active: currentWork.id === work.id}"
+            @click.prevent="$emit('choose', ndx)")
+                a(href="#").thumbnail__link
+                    img(:src="work.path").thumbnail__img
+
+script(type="text/x-template")#slider-btns
+    .controls(class='gallery-slider__controls square vertical')
+        .controls__item.controls__item--next(
+        :class="{disabled: currentIndex === lastIndexOfWorkArray}"
+        )
+            a.controls__link(
+            href="#"
+            @click.prevent="$emit('slide', 'next')")
+                +icon('arrow-down', 'controls__icon')
+        .controls__item.controls__item--prev(
+        :class="{disabled: currentIndex === 0}"
+        )
+            a.controls__link(href="#"
+            :class="{disabled: currentIndex === 0}"
+            @click.prevent="$emit('slide', 'prev')")
+                +icon('arrow-down', 'controls__icon')
+
+script(type="text/x-template")#slider-info
+    .work__info
+        .work__describe
+            tags(
+                :tagsArray="tagsArray"
+            )
+            .work__title.subtitle {{currentWork.title}}
+            .work__desc
+                p {{currentWork.desc}}
+            .work__link
+                +icon('link', 'work__link-icon')
+                a.work__ref(:href="currentWork.link") Посмотреть сайт
+
+script(type="text/x-template")#slider-tags
+    div.tags.work__skills
+        ul.tags__list
+            li.tags__item(v-for="tag in tagsArray") {{tag}}

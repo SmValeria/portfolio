@@ -1,6 +1,11 @@
 .form {
-    margin: 0 -25px;
     width: 60%;
+    @include desktop {
+        width: 80%;
+    }
+    @include tablets {
+        width: 100%;
+    }
 }
 
 .form__container {
@@ -14,20 +19,36 @@
     &:last-of-type {
         margin-bottom: 60px;
     }
+
+    @include phones {
+        flex-direction: column;
+    }
 }
 
 .form__block {
     flex: 1;
     padding-left: 50px;
     border-bottom: 2px solid $text-color;
-    &--without-icon {
-        padding-left: 0;
-        border: none;
-    }
 }
 
 .form__el {
-    margin: 0 25px;
+    @include phones {
+        margin-bottom: 40px;
+    }
+
+    &:last-of-type {
+        @include phones {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.form__el:not(:last-of-type) {
+    margin-right: 50px;
+
+    @include phones {
+        margin-right: 0;
+    }
 }
 .form__title {
     display: block;
@@ -76,9 +97,22 @@
     font-size: 18px;
     font-weight: 700;
     text-transform: uppercase;
+    display: flex;
+    justify-content: center;
 
     &:hover {
         background-image: linear-gradient(to right, #bb00ff 0%, #5900ff 100%);
+    }
+
+    @include tablets {
+       margin-right: auto;
+       margin-left: auto;
+    }
+
+    @include phones {
+        padding: 30px 0;
+        width: 100%;
+        max-width: 260Px;
     }
 
 }

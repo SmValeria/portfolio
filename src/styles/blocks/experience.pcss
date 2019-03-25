@@ -4,19 +4,58 @@
 .experience__container {
     padding-left: 35%;
     position: relative;
+    @include desktop {
+        padding-left: 25%;
+    }
+    @include tablets {
+        padding-left: 0;
+        text-align: center;
+        display: flex;
+        flex-direction: column-reverse;
+    }
 }
 
 .experience__bg-img {
     position: absolute;
-    width: 45%;
+    max-width: 45%;
+    height: auto;
     left: 0;
     bottom: 15%;
 
+    @include desktop {
+        transform: translateX(-30%);
+        max-width: 50%;
+    }
+
+    @include tablets {
+        position: relative;
+        bottom: 0;
+        transform: translateX(0);
+        margin: 0 auto;
+    }
+}
+
+.experience__content {
+    @include tablets {
+        margin-bottom: 70px;
+    }
 }
 
 .experience__header {
     padding-right: 25%;
     margin-bottom: 60px;
+    @include desktop {
+        padding-right: 18%;
+    }
+
+    @include tablets {
+        padding-left: 18%;
+        padding-right: 18%;
+    }
+    @include phones {
+        padding: 0;
+        text-align: left;
+    }
 }
 .experience__title {
     margin-bottom: 30px;
@@ -28,5 +67,9 @@
 }
 
 .experience__skills {
-    padding: 0 10%;
+    padding: 0 8%;
+
+    @include desktop {
+        padding: 0;
+    }
 }

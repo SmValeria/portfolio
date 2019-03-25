@@ -12,6 +12,10 @@
     top: 0;
     background-color: rgba($text-color-light, 1);
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+
+    @include tablets {
+      background-color: transparent;
+    }
   }
 }
 .header__container {
@@ -28,5 +32,26 @@
   height: 100%;
   display: flex;
   justify-content: center;
+
+
+  @include tablets {
+    display: none;
+  }
 }
 
+.header__social {
+  @include tablets {
+    margin-left: auto;
+    margin-right: 10%;
+  }
+
+  @include phones {
+    display: none;
+  }
+}
+.header__hamburger {
+  display: none;
+  @include tablets {
+    display: flex;
+  }
+}

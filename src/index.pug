@@ -43,91 +43,6 @@
     ]
 
 -
-    var skills = [
-        [
-            'Front-end',
-            [
-                {
-                    title: "HTML5",
-                    progress: 230
-                },
-                {
-                    title: "CSS3",
-                    progress: 230
-                },
-                {
-                    title: "Javascript",
-                    progress: 260
-                },
-                {
-                    title: "Jquery и Vue.js",
-                    progress: 260
-                }
-            ]
-        ],
-        [
-            'Workflow',
-            [
-                {
-                    title: "GIT",
-                    progress: 220
-                },
-                {
-                    title: "Terminal",
-                    progress: 220
-                },
-                {
-                    title: "Gulp",
-                    progress: 260
-                },
-                {
-                    title: "Webpack",
-                    progress: 270
-                }
-            ]
-        ]
-    ]
-
--
-    var workSlider = [
-        {
-            path: 'preview/1.jpg',
-            link: '#',
-            skills: [],
-            title: '',
-            text: ''
-        },
-        {
-            path: 'preview/2.jpg',
-            link: '#',
-            skills: [],
-            title: '',
-            text: ''
-        },
-        {
-            path: 'preview/3.jpg',
-            link: '#',
-            skills: [],
-            title: '',
-            text: ''
-        },
-        {
-            path: 'preview/4.jpg',
-            link: '#',
-            skills: [],
-            title: '',
-            text: ''
-        },
-        {
-            path: 'preview/5.jpg',
-            link: '#',
-            skills: [],
-            title: '',
-            text: ''
-        }
-    ]
-
--
     var reviewsSlider = [
         {
             name: "Ковальчук Дмитрий",
@@ -147,15 +62,12 @@ include ./mixins.pug
 
 include ./components/nav
 include ./components/socials
-include ./components/progress
 include ./components/decoration
-include ./components/gallery-slider
-include ./components/tags
 include ./components/controls
 include ./components/carousel
 include ./components/form
 include ./components/scroll-down
-
+include ./components/hamburger
 
 <!DOCTYPE html>
 html(lang="en")
@@ -168,24 +80,30 @@ html(lang="en")
     body
         .wrapper
             .maincontent
-                .welcome-section(
-                style=`background-image: url('${require('./images/content/hero_bg.jpg')}')`)
+                //- .welcome-section(
+                //- style=`background-image: url('${require('./images/content/hero_bg.jpg')}')`)
+                .welcome-section
+                    include ./sections/hero-parallax
                     section.hero.fullscreen-section.section#hero
                         .container.hero__container
                             header.hero__header.header
                                 .container.header__container
                                     div(class=`header__logo`)
                                         .logo
-                                            a.logo__link(href="#") SmV
+                                            a.logo__link(href="#") SV
                                     +nav(`header`, menu)
                                     +socials(`header`, socials)
+                                    +hamburger('header__hamburger')
                             .hero__content
                                 include ./sections/main-info
                             .hero__scroll-down
                                 +scroll-down('about')
                     include ./sections/about
                 include ./sections/experience
-                include ./sections/work
+                section.work.section#work
+                    .container.work__container
+                        h2.title.work__title Мои работы
+                        #slider-component
                 .contacts-section(
                 style=`background-image: url('${require('./images/content/budda.jpg')}')`)
                     section.reviews.section#reviews
@@ -200,5 +118,11 @@ html(lang="en")
                             h2.title.contacts__title Связаться со мной
                             +form('contacts__form form')
                 include ./sections/footer
+            .mobile-menu
+                +hamburger('mobile-menu__hamburger hamburger--close')
+                +nav(`mobile-menu`, menu)
+                +socials(`mobile-menu`, socials)
+
+        include ./templates/entry
 
 

@@ -1,0 +1,57 @@
+.thumbnail {
+    position: absolute;
+    width: 20%;
+    height: 80.5%;
+    bottom: 0;
+    right: 0;
+    overflow: hidden;
+
+    @include desktop {
+        width: 28%;
+        height: 84.5%;
+    }
+    @include phones {
+        display: none;
+    }
+}
+
+.thumbnail__list {
+    display: flex;
+    flex-direction: column-reverse;
+    position: absolute;
+    bottom: 0;
+}
+
+.thumbnail__item {
+    position: relative;
+    cursor: pointer;
+    &.active {
+        outline: 3px solid $main-color;
+        outline-offset: -3px;
+    }
+
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(85, 0, 242, 0.3);
+        opacity: 0;
+        transition: opacity 0.2s;
+    }
+
+    &:hover::after {
+        opacity: 1;
+    }
+
+    &.active:hover::after {
+        opacity: 0;
+    }
+}
+
+.thumbnail__link {
+    display: block;
+}

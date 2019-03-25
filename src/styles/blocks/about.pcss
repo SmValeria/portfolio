@@ -1,9 +1,14 @@
 .about__container {
-  padding: 10% 17% 5%;
+  padding: 100px 17% 60px;
   margin-right: auto;
   margin-left: auto;
   display: flex;
   justify-content: space-between;
+
+  @include tablets{
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 
@@ -21,6 +26,10 @@
   margin-right: auto;
   margin-left: auto;
   margin-bottom: 50px;
+
+  @include tablets {
+    margin-left: 0;
+  }
 }
 
 .about__user-photo {
@@ -29,6 +38,7 @@
 
 .about__hello {
   margin-bottom: 20px;
+  font-weight: 600;
 }
 
 .about__title {
@@ -61,5 +71,33 @@
     line-height: 0;
     top: 20px;
     left: -25px;
+  }
+}
+
+@media screen and (max-width: 570px) {
+
+  .about__container {
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 85%;
+  }
+  .about__left {
+    flex-basis: initial;
+    margin-right: 0;
+    margin-bottom: 50px;
+  }
+
+  .about__right {
+    flex-basis: initial;
+  }
+
+  .about__user-photo-wr {
+    margin-left: auto;
+  }
+
+  .about__note {
+    &::before {
+    left: -6Px;
+    }
   }
 }

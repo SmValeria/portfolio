@@ -1,9 +1,11 @@
 section.experience.section#experience
     .container.experience__container
         +image('content/bag.png', 'experience__bg-img')
-        .experience__header
-            h3.subtitle.experience__title Чем я могу быть полезена вам
-            .experience__desc Этот сайт я сделала в рамках обучения в Школе онлайн образования
-                | LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё
-                | классно и красиво!
-        +progress('experience', skills)
+        .experience__content
+            .experience__header
+                h3.subtitle.experience__title Чем я могу быть полезена вам
+                .experience__desc Этот сайт я сделала в рамках обучения в Школе онлайн образования
+                    | LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё
+                    | классно и красиво!
+            .experience__skills
+                #skills-component

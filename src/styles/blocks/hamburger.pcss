@@ -1,0 +1,33 @@
+.hamburger {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+
+    &--close {
+        .hamburger__line-top {
+            transform: translateY(7Px) rotate(45deg);
+        }
+
+        .hamburger__line-bottom {
+            transform: translateY(-7Px) rotate(-45deg);
+        }
+
+        .hamburger__line-middle {
+            opacity: 0;
+        }
+    }
+
+    .hamburger__line {
+        display: flex;
+        width: 24px;
+        height: 4px;
+        background-color: $text-color;
+        margin-bottom: 4px;
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+    }
+}
+
