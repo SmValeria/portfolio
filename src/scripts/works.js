@@ -92,7 +92,7 @@ new Vue({
             const list = container.querySelector('.thumbnail__list');
             const itemHeight = list.querySelector('.thumbnail__item').offsetHeight;
             const countVisibleItems =  (containerHeight / itemHeight) - 1;
-            console.log(itemHeight);
+            
             if (index === this.works.length) return;
             if(index <= countVisibleItems) {
                 list.style.transform = `translateY(0px)`;
