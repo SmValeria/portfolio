@@ -1,23 +1,20 @@
-.carousel__list{
-    width: 100%;
-    display: flex;
-    overflow: hidden;
-}
 .carousel__item {
+    width: 50%;
+    min-height: 250px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: auto;
-    margin-right: 30px;
-    width: 50%;
-    flex-shrink: 0;
+    padding: 15px;
+    flex-grow: 1;
+    @include phones {
+        width: 100%;
+    }
+
     &:last-of-type {
         margin-right: 0;
     }
 
-    @include phones {
-        width: 100%;
-    }
+
 }
 
 .carousel__text {

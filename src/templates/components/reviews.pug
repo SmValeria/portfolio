@@ -1,0 +1,29 @@
+script(type="text/x-template")#reviews-container
+    .reviews__content
+        .controls(class="reviews__controls round horizontal")
+            .controls__item.controls__item--prev
+                a.controls__link(
+                    href="#"
+                    @click.prevent="previous()")
+                    +icon('arrow-down', 'controls__icon')
+            .controls__item.controls__item--next
+                a.controls__link(
+                    href="#"
+                    @click.prevent="next()")
+                    +icon('arrow-down', 'controls__icon')
+        .carousel(class="reviews__carousel")
+            flickity(ref='flickity', :options='flickityOptions').carousel__list
+                div.carousel__item.quote(
+                    v-for="review in reviews"
+                    :key="review.item"
+                )
+                    .carousel__text {{review.quote}}
+                    .carousel__desc.user
+                        .user__photo-wr.carousel__user-photo-wr
+                            .user__photo.carousel__user-photo(
+                                :style="{ backgroundImage: review.photo }"
+                                style="background-position: top center"
+                            )
+                        .carousel__info
+                            .user__name.carousel__author {{review.name}}
+                            .user__occ.carousel__occ {{review.occupation}}

@@ -42,29 +42,11 @@
         }
     ]
 
--
-    var reviewsSlider = [
-        {
-            name: "Ковальчук Дмитрий",
-            occupation: "Основатель Loftschool",
-            quote: `Эта девушка проходила обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!`,
-            photo: "kovalchuk.jpg"
-        },
-        {
-            name: "Владимир Сабанцев",
-            occupation: "Преподаватель",
-            quote: "Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах",
-            photo: "sabancev.jpg"
-        }
-    ]
-
 include ./mixins.pug
 
 include ./components/nav
 include ./components/socials
 include ./components/decoration
-include ./components/controls
-include ./components/carousel
 include ./components/form
 include ./components/scroll-down
 include ./components/hamburger
@@ -102,17 +84,15 @@ html(lang="en")
                     .container.work__container
                         h2.title.work__title Мои работы
                         #slider-component
-                //-.contacts-section(
-                //-style=`background-image: url('${require('./images/content/budda.jpg')}')`)
                 .contacts-section
                     include ./sections/budda-parallax
                     section.reviews.section#reviews
                         +decoration('top')
                         .container.reviews__container
-                            .reviews__top
-                                h2.title.reviews__title Что обо мне говорят
-                                +controls('reviews__controls round horizontal')
-                            +carousel('reviews__carousel', reviewsSlider)
+                            .reviews__wrapper
+                                .reviews__main
+                                    h2.title.reviews__title Что обо мне говорят
+                                    #reviews-component
                     section.contacts.section#contacts
                         .container.contacts__container
                             h2.title.contacts__title Связаться со мной
