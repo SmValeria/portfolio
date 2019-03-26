@@ -6,9 +6,13 @@
 
         window.addEventListener('scroll', () => {
             let offset = window.pageYOffset;
-            sections.forEach((section)=>{
-                let itemTopPosition = section.offsetTop - headerHeight;
+
+            sections.forEach((section,index)=>{
+
+                let itemTopPosition = section.getBoundingClientRect().top + offset - headerHeight;
                 let itemBottomPosition = itemTopPosition + section.clientHeight;
+
+
                 if(offset >= itemTopPosition && offset <= itemBottomPosition) {
                     sections.forEach((item) => {
                         if(section !== item) {

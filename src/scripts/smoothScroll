@@ -34,10 +34,10 @@
         document.querySelectorAll('[data-scroll-to]').forEach((link) => {
             link.addEventListener('click', (event) => {
                 event.preventDefault();
-                console.log(link);
                 let anchor = link.getAttribute('data-scroll-to');
-                let scrollTo = document.querySelector(anchor);
-                smoothScrollTo(scrollTo.offsetTop -100, 300);
+                let element = document.querySelector(anchor);
+                let scrollTo = element.getBoundingClientRect().top + window.pageYOffset - 100;
+                smoothScrollTo(scrollTo, 300);
             });
         })
     });
