@@ -11,6 +11,11 @@
 
 .reviews__title {
     margin-bottom: 100px;
+
+    @include w720 {
+        margin-bottom: 30px;
+        text-align: center;
+    }
 }
 
 .reviews__controls {
@@ -24,21 +29,14 @@
         left: 50%;
     }
 
-}
-
-@media screen and (max-width: 720px) {
-    .reviews__title {
-        margin-bottom: 30px;
-        text-align: center;
-    }
-    .reviews__controls {
+    @include w720 {
         position: relative;
         margin-left: 0;
         justify-content: center;
         left: 0;
         margin-bottom: 70px;
-
     }
+
 }
 
 .reviews__carousel {

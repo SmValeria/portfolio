@@ -22,6 +22,9 @@
     flex-direction: row;
     margin: 0 -15px -10px;
     flex-wrap: wrap;
+    @include w570 {
+        justify-content: center;
+    }
 }
 
 .skills__row-item {
@@ -30,14 +33,8 @@
     min-width: 150px;
     position: relative;
     padding: 10px 15px;
-}
 
-@media screen and (max-width: 570px) {
-    .skills__row {
-        justify-content: center;
-    }
-
-    .skills__row-item {
+    @include w570 {
         width: 50%;
     }
 }
