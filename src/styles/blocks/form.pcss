@@ -18,22 +18,28 @@
     margin-bottom: 40px;
     &:last-of-type {
         margin-bottom: 60px;
+        @include phones {
+            margin-bottom: 100px;
+        }
     }
 
     @include phones {
         flex-direction: column;
+        margin-bottom: 70px;
     }
 }
 
 .form__block {
     flex: 1;
+    position: relative;
     padding-left: 50px;
     border-bottom: 2px solid $text-color;
+    transition: border-bottom-color 0.2s;
 }
 
 .form__el {
     @include phones {
-        margin-bottom: 40px;
+        margin-bottom: 70px;
     }
 
     &:last-of-type {
@@ -54,7 +60,8 @@
     display: block;
     color: rgba($text-color, 0.3);
     font-weight: 600;
-    margin-bottom: 30px;
+    transform: translateY(100%);
+    transition: transform 0.2s;
 }
 
 .form__input-wr {
@@ -77,17 +84,42 @@
     background: transparent;
     border: none;
     outline: none;
+    font-weight: bold;
+    color: $text-color;
 }
 
 .form__textarea {
     resize: none;
     overflow: hidden;
+    line-height: 1.5;
 }
 
-::-webkit-input-placeholder {font-weight: bold}
-::-moz-placeholder          {font-weight: bold}
-:-moz-placeholder           {font-weight: bold}
-:-ms-input-placeholder      {font-weight: bold}
+.form__error {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #cd1515;
+    color: $text-color-light;
+    padding: 15px 20px;
+    text-align: center;
+    z-index: 1;
+
+
+    &::before {
+        content: '';
+        display: flex;
+        width: 0;
+        height: 0;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -100%);
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 7px solid #cd1515;
+    }
+}
 
 .form__submit {
     border-radius: 40px 5px;
@@ -117,4 +149,16 @@
         max-width: 260Px;
     }
 
+}
+
+.form__block.active {
+    border-bottom-color: $main-color;
+
+    .form__title {
+        transform: translateY(-100%);
+    }
+
+    .form__icon {
+        fill: $main-color;
+    }
 }
