@@ -24,7 +24,7 @@
                 header.page__title Блок «Обо мне»
                 .page__maincontent.about
                     .about__add
-                        btn.about__btn Добавить группу
+                        button.about__btn(type="button") Добавить группу
 </template>
 
 <style lang="postcss">
