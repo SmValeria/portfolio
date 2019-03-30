@@ -50,14 +50,15 @@ script(type="text/x-template")#slider-btns
         .controls__item.controls__item--next(
         :class="{disabled: currentIndex === lastIndexOfWorkArray}"
         )
-            a.controls__link(
-            href="#"
+            button.controls__link(
+            type="button"
             @click.prevent="$emit('slide', 'next')")
                 +icon('arrow-down', 'controls__icon')
         .controls__item.controls__item--prev(
         :class="{disabled: currentIndex === 0}"
         )
-            a.controls__link(href="#"
+            button.controls__link(
+            type="button"
             :class="{disabled: currentIndex === 0}"
             @click.prevent="$emit('slide', 'prev')")
                 +icon('arrow-down', 'controls__icon')

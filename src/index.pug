@@ -44,12 +44,12 @@
 
 include ./mixins.pug
 
-include ./components/nav
-include ./components/socials
-include ./components/decoration
-include ./components/form
-include ./components/scroll-down
-include ./components/hamburger
+include ./templates/mixins/nav
+include ./templates/mixins/socials
+include ./templates/mixins/decoration
+include ./templates/mixins/form
+include ./templates/mixins/scroll-down
+include ./templates/mixins/hamburger
 
 <!DOCTYPE html>
 html(lang="en")
@@ -63,7 +63,7 @@ html(lang="en")
         .wrapper
             .maincontent
                 .welcome-section
-                    include ./sections/hero-parallax
+                    include ./templates/sections/hero-parallax
                     section.hero.fullscreen-section.section#hero
                         .container.hero__container
                             header.hero__header.header
@@ -75,18 +75,18 @@ html(lang="en")
                                     +socials(`header`, socials)
                                     +hamburger('header__hamburger')
                             .hero__content
-                                include ./sections/main-info
+                                include ./templates/sections/main-info
                             .hero__scroll-down
                                 +scroll-down('about')
-                    include ./sections/about
-                include ./sections/experience
+                    include ./templates/sections/about
+                include ./templates/sections/experience
                 section.work.section#work
                     .container.work__container
                         h2.title.work__title Мои работы
                         #slider-component
                 .contacts-section
                     +decoration('top')
-                    include ./sections/budda-parallax
+                    include ./templates/sections/budda-parallax
                     section.reviews.section#reviews
                         .container.reviews__container
                             .reviews__wrapper
@@ -97,7 +97,7 @@ html(lang="en")
                         .container.contacts__container
                             h2.title.contacts__title Связаться со мной
                             +form('contacts__form form')
-                include ./sections/footer
+                include ./templates/sections/footer
             .mobile-menu
                 +hamburger('mobile-menu__hamburger hamburger--close')
                 +nav(`mobile-menu`, menu)
