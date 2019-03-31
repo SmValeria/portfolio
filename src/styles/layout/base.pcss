@@ -27,6 +27,10 @@ body {
     position: relative;
 }
 
+.maincontent {
+    min-height: 100vh;
+}
+
 .container {
     margin: 0 auto;
     max-width: 1480px;
@@ -119,7 +123,21 @@ input[type="tel"],
 textarea,
 select {
     outline-color: transparent;
+    border: none;
 }
+
+/* Deleting arrows input[type=number] */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
+}
+
+
 a {
     color: inherit;
     cursor: pointer;

@@ -116,11 +116,13 @@ module.exports = (env, argv) => {
     plugins: [
       new HtmlWebpackPlugin({
         template: "src/index.pug",
+        favicon: "src/images/favicon.png",
         chunks: ["main"]
       }),
       new HtmlWebpackPlugin({
         template: "src/admin/index.pug",
         filename: "admin/index.html",
+        favicon: "src/images/favicon.png",
         chunks: ["admin"]
       }),
       new SpriteLoaderPlugin({ plainSprite: true }),

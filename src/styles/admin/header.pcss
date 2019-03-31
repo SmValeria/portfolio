@@ -1,0 +1,55 @@
+.header {
+    padding: 15px 0;
+    background-color: #3e3e59;
+    background-image: linear-gradient(to right, #3e3e59 0%, #454573 100%);
+    color: #ffffff;
+}
+
+.header__container {
+    display: flex;
+    align-items: center;
+}
+
+.header__user {
+    display: flex;
+    align-items: center;
+    min-width: 260Px;
+    margin-right: 10px;
+}
+.header__user-photo-wr {
+    max-width: 45Px;
+    margin-right: 20px;
+}
+.header__user-name {
+    font-weight: 600;
+    @include phones {
+        margin-bottom: 5px;
+    }
+}
+.header__title {
+    color: rgba($text-color-light, 0.5);
+    font-size: 14px;
+    @include phones {
+        display: none;
+    }
+}
+.header__btn {
+    color: rgba($text-color-light, 0.7);
+    text-decoration: underline;
+
+    &--phone {
+        display: none;
+        @include phones {
+            display: inline-flex;
+        }
+    }
+
+    &--desktop {
+        margin-left: auto;
+        @include phones {
+            display: none;
+        }
+    }
+
+
+}

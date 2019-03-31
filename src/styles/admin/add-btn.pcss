@@ -1,0 +1,24 @@
+.add-btn {
+    color: #383bcf;
+    font-weight: 600;
+
+    &::before {
+        content: '+';
+        width: 21Px;
+        height: 21Px;
+        font-size: 16Px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: $text-color-light;
+        background-image: linear-gradient(to right, #006aed 0%, #3f35cb 100%);
+        border-radius: 50%;
+        line-height: 0;
+    }
+
+    &--big::before {
+        width: 40Px;
+        height: 40Px;
+        font-size: 30Px;
+    }
+}
