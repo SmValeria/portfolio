@@ -31,7 +31,7 @@
     &:nth-of-type(2) {
         .parallax-hero__img {
             right: 0;
-            top: 20%;
+            top: 25%;
 
         }
     }
@@ -39,7 +39,7 @@
     &:nth-of-type(3) {
         .parallax-hero__img {
             left: 50%;
-            top: 30%;
+            top: 32%;
             margin-left: 12%;
             @include desktop {
                 left: initial;
@@ -68,7 +68,7 @@
 
     &:nth-of-type(5) {
         .parallax-hero__img {
-            top: 32%;
+            top: 35%;
             left: 0;
         @include tablets {
             left: -27%;
@@ -79,7 +79,7 @@
     &:nth-of-type(6) {
         .parallax-hero__img {
             right: 0;
-            top: 32%;
+            top: 35%;
         }
     }
 
@@ -90,10 +90,14 @@
             display: inline-flex;
             max-width: none;
             width: 100%;
-            height: 60%;
+            height: 45%;
 
             @include desktop {
                 height: 65%;
+            }
+            @include w1050 {
+                width: auto;
+                height: 77%;
             }
             @include tablets {
                 width: auto;
