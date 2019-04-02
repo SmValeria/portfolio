@@ -1,0 +1,23 @@
+.admin-tags {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.admin-tags__item {
+    display: flex;
+    align-items: center;
+    border-radius: 15px;
+    padding: 10px 15px;
+    background-color: #f4f4f4;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    &:last-of-type {
+        margin-right: 0;
+    }
+}
+
+.admin-tags__delete {
+    margin-left: 10px;
+    background: svg-load("cross.svg", fill=$text-color, width=100%, height=100%) center no-repeat;
+}

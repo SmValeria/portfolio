@@ -34,6 +34,7 @@ body {
 .container {
     margin: 0 auto;
     max-width: 1480px;
+    width: 95%;
     @include desktop {
         max-width: 1080Px;
     }
@@ -47,7 +48,7 @@ body {
     @include phonesM {
         max-width: 260Px;
     }
-    width: 95%;
+
 
     @include phones {
         width: 85%;
@@ -61,6 +62,19 @@ body {
 
 .hidden {
     display: none;
+}
+
+.visuallyhidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
 }
 
 button {
@@ -120,10 +134,15 @@ input[type="email"],
 input[type="password"],
 input[type="number"],
 input[type="tel"],
+input[type="url"],
 textarea,
 select {
     outline-color: transparent;
     border: none;
+}
+
+textarea {
+    resize: none;
 }
 
 /* Deleting arrows input[type=number] */

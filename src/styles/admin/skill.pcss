@@ -13,22 +13,31 @@
 
 .skill__percent {
     width: 55Px;
-    margin-right: auto;
+    margin-right: 20px;
     padding-right: 5px;
     padding-left: 5px;
     display: flex;
     justify-content: space-between;
+
 }
-.skill__edit {
-    width: 16px;
-    height: 15px;
-    background: svg-load("pencil.svg", fill=$text-color, width=100%, height=100%) center no-repeat;
+.skill__edit,
+.skill__confirm{
+    margin-left: auto;
     margin-right: 20px;
 }
 
 .skill__remove {
-    width: 13px;
-    height: 15px;
     background: svg-load("trash.svg", fill=$text-color, width=100%, height=100%) center no-repeat;
+}
 
+.skill__edit {
+    background: svg-load("pencil.svg", fill=$text-color, width=100%, height=100%) center no-repeat;
+}
+
+.skill__confirm {
+    background: svg-load("tick.svg", fill=#00d70a, width=100%, height=100%) center no-repeat;
+}
+
+.skill__delete {
+    background: svg-load("cross.svg", fill=#bf2929, width=100%, height=100%) center no-repeat;
 }

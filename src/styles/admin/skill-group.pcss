@@ -1,0 +1,31 @@
+.skill-group__confirm,
+.skill-group__delete {
+    display: none;
+}
+
+.skill-group.new,
+.skill-group.edit {
+    .skill-group__edit {
+        display: none;
+    }
+    .skill-group__confirm,
+    .skill-group__delete {
+        display: inline-block;
+    }
+}
+
+.skill-group__confirm {
+    margin-right: 20px;
+}
+
+.skill-group__edit {
+    background: svg-load("pencil.svg", fill=$text-color, width=100%, height=100%) center no-repeat;
+}
+
+.skill-group__confirm{
+    background: svg-load("tick.svg", fill=#00d70a, width=100%, height=100%) center no-repeat;
+}
+
+.skill-group__delete {
+    background: svg-load("cross.svg", fill=#bf2929, width=100%, height=100%) center no-repeat;
+}

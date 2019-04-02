@@ -22,3 +22,30 @@
         font-size: 30Px;
     }
 }
+
+.add-btn__circle {
+    width: 100%;
+    max-width: 150px;
+    background-color: transparent;
+    border: 1px solid $text-color-light;
+    border-radius: 50%;
+    position: relative;
+    margin-bottom: 30px;
+
+    &::before {
+        content: '';
+        display: flex;
+        padding-top: 100%;
+    }
+
+    &::after {
+        content: '+';
+        display: flex;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 72px;
+        font-weight: 300;
+    }
+}
