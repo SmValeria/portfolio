@@ -35,12 +35,45 @@ module.exports = (env, argv) => {
     }
   };
 
-  const files = {
-    test: /\.(png|jpe?g|gif|woff2?)$/i,
+  const fonts = {
+    test: /\.(woff2?)$/i,
     loader: "file-loader",
     options: {
       name: "[hash].[ext]"
     }
+  };
+
+  const images = {
+    test: /\.(png|jpe?g|gif)$/i,
+    use: [
+      {
+        loader: "file-loader",
+        options: {
+          name: "[hash].[ext]"
+        }
+      },
+      {
+        loader: 'image-webpack-loader',
+        options: {
+          disable: true,
+          mozjpeg: {
+            progressive: true,
+            quality: 65
+          },
+          optipng: {
+            enabled: false,
+          },
+          pngquant: {
+            quality: '65-80',
+            speed: 4
+          },
+          gifsicle: {
+            interlaced: false,
+          }
+        }
+      }
+    ]
+
   };
 
   const svg = {
@@ -95,7 +128,7 @@ module.exports = (env, argv) => {
       chunkFilename: "[chunkhash].js"
     },
     module: {
-      rules: [pcss, vue, js, files, svg, pug]
+      rules: [pcss, vue, js, fonts, images, svg, pug]
     },
     resolve: {
       alias: {
