@@ -4,7 +4,7 @@
     const layers = parallax.children;
     
     function moveLayersOnMouseMove() {
-        parallax.addEventListener('mousemove', function (e) {
+        document.addEventListener('mousemove', function (e) {
             let x = e.clientX,
                 y = e.clientY;
             Array.from(layers).forEach((item)=>{
