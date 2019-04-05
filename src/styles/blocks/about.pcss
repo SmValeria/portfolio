@@ -1,10 +1,13 @@
 .about__container {
-  padding: 100px 17% 60px;
+  padding: 100px 12% 60px;
   margin-right: auto;
   margin-left: auto;
   display: flex;
   justify-content: space-between;
-
+  @include desktopHd {
+    padding-left: 17%;
+    padding-right: 17%;
+  }
   @include tablets{
     padding-left: 0;
     padding-right: 0;
