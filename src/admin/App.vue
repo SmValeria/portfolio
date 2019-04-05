@@ -1,20 +1,23 @@
 <template lang="pug">
     .admin
-        Header
-        Nav(
-        :active="activeTab"
-        :menu="menu")
-        .page
-            .page__container.container
-                PageTitle(
-                :title="activeTabTitle"
-                )
-                .page__maincontent
-                    About
-                    Works
-                    Reviews
+        .admin__content
+            Header
+            Nav(
+            :active="activeTab"
+            :menu="menu")
+            .page
+                .page__container.container
+                    PageTitle(
+                    :title="activeTabTitle"
+                    )
+                    .page__maincontent
+                        About
+                        Works
+                        Reviews
+        Auth
 </template>
 <script>
+    import Auth from './components/Auth'
     import Header from './components/Header'
     import Nav from './components/Nav'
     import PageTitle from './components/PageTitle'
@@ -44,6 +47,7 @@
             }
         },
         components: {
+            Auth,
             Header,
             Nav,
             PageTitle,

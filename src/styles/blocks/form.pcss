@@ -1,15 +1,10 @@
-.form {
-    width: 60%;
-    @include desktop {
-        width: 80%;
-    }
-    @include tablets {
-        width: 100%;
-    }
-}
-
 .form__container {
     width: 100%;
+}
+
+.form__header {
+    font-size: 36px;
+    font-weight: 600;
 }
 
 .form__row {
@@ -77,6 +72,20 @@
     margin-right: 20px;
     fill: rgba($text-color, 0.3);
     flex-shrink: 0;
+}
+
+.form__icon-block {
+    width: 30px;
+    height: 30px;
+    margin-right: 20px;
+}
+
+.form__icon-block--login {
+    background: svg-load("user.svg", fill=rgba($text-color, 0.3), width=100%, height=100%) center/contain no-repeat;
+}
+
+.form__icon-block--password {
+    background: svg-load("key.svg", fill=rgba($text-color, 0.3), width=100%, height=100%) center/contain no-repeat;
 }
 
 .form__input {
