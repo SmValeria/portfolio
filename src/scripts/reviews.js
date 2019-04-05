@@ -15,7 +15,7 @@ new Vue({
                 prevNextButtons: false,
                 pageDots: false,
                 wrapAround: true,
-                groupCells: window.screen.width > 480 ? 2 : 1,
+                groupCells: true,
                 resize: true,
             }
         }
