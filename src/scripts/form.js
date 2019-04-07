@@ -15,6 +15,7 @@ submitButton.addEventListener('click', function (evt) {
 inputs.forEach(input => {
     const inputWrapper = input.closest('.form__block');
     input.addEventListener('focus', function () {
+        inputWrapper.classList.remove('error');
         inputWrapper.classList.add('active');
         inputWrapper.querySelector('.form__error').classList.add('hidden');
     });
@@ -52,7 +53,7 @@ function checkInput(input) {
     if (!input.checkValidity()) {
         errorWrapper.textContent = input.validationMessage;
         errorWrapper.classList.remove('hidden');
-        console.log(errorWrapper);
+        inputWrapper.classList.add('error');
         return false
     } else {
         errorWrapper.textContent = '';

@@ -2,11 +2,6 @@
     width: 100%;
 }
 
-.form__header {
-    font-size: 36px;
-    font-weight: 600;
-}
-
 .form__row {
     display: flex;
     width: 100%;
@@ -27,7 +22,6 @@
 .form__block {
     flex: 1;
     position: relative;
-    padding-left: 50px;
     border-bottom: 2px solid $text-color;
     transition: border-bottom-color 0.2s;
 }
@@ -53,6 +47,7 @@
 }
 .form__title {
     display: block;
+    padding-left: 50px;
     color: rgba($text-color, 0.3);
     font-weight: 600;
     transform: translateY(100%);
@@ -62,8 +57,6 @@
 .form__input-wr {
     display: flex;
     padding-bottom: 15px;
-    position: relative;
-    left: -50px;
 }
 
 .form__icon {
@@ -72,20 +65,6 @@
     margin-right: 20px;
     fill: rgba($text-color, 0.3);
     flex-shrink: 0;
-}
-
-.form__icon-block {
-    width: 30px;
-    height: 30px;
-    margin-right: 20px;
-}
-
-.form__icon-block--login {
-    background: svg-load("user.svg", fill=rgba($text-color, 0.3), width=100%, height=100%) center/contain no-repeat;
-}
-
-.form__icon-block--password {
-    background: svg-load("key.svg", fill=rgba($text-color, 0.3), width=100%, height=100%) center/contain no-repeat;
 }
 
 .form__input {
@@ -169,5 +148,13 @@
 
     .form__icon {
         fill: $main-color;
+    }
+}
+
+.form__block.error {
+    border-bottom-color: #cd1515;
+
+    .form__icon {
+        fill: #cd1515;
     }
 }
