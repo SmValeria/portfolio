@@ -3,12 +3,7 @@
         .header__container.container
             .user.header__user
                 .user__photo-wr.header__user-photo-wr
-                    .user__photo(
-                    style=`background-image: url('~images/content/user.jpg')`
-                    )
-                    img(
-                    src="../../images/content/user.jpg"
-                    )
+                    .user__photo
                 .header__user-info
                     .user__name.header__user-name Валерия Смирнова
                         ExitBtn(class="header__btn--phone")
@@ -28,5 +23,7 @@
 </script>
 
 <style scoped>
-
+    .user__photo {
+        background-image: url('../../images/content/user.jpg');
+    }
 </style>

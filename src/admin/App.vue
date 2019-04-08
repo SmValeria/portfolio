@@ -67,4 +67,7 @@
 
     @import '../styles/admin/*.pcss';
 
+    .admin {
+        background: url('../images/content/hero_bg.jpg') center top/cover no-repeat;
+    }
 </style>
