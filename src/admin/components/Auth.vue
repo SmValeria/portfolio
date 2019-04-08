@@ -61,14 +61,13 @@
         },
         methods: {
             login () {
-                if(!this.checkForm) return;
-
+                if(!this.checkForm()) return;
                 axios.post('https://webdev-api.loftschool.com/login', {
-                    name: this.user.name,
-                    lastName: this.user.password
+                    name: this.user.login,
+                    password: this.user.password
                 })
                     .then(function (response) {
-                        console.log(response);
+                        localStorage.setItem('token', response.data.token);
                     })
                     .catch(function (error) {
                         console.log(error);
@@ -102,7 +101,6 @@
 
 <style lang="postcss" scoped>
     @import "../../styles/mixins.pcss";
-
 
     .auth__overlay {
         width: 100%;
