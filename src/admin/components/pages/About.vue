@@ -186,7 +186,7 @@
 </template>
 
 <script>
-    import AddButton from './AddButton'
+    import AddButton from '../AddButton'
 
     export default {
         name: "About",

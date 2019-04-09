@@ -5,8 +5,8 @@
 </template>
 
 <script>
-    import ReviewEdit from './ReviewEdit'
-    import ReviewList from './ReviewList'
+    import ReviewEdit from '../ReviewEdit'
+    import ReviewList from '../ReviewList'
     export default {
         name: "Reviews",
         components: {

@@ -5,8 +5,8 @@
 </template>
 
 <script>
-    import WorkEdit from './WorkEdit'
-    import WorkList from './WorkList'
+    import WorkEdit from '../WorkEdit'
+    import WorkList from '../WorkList'
     export default {
         name: "Works",
         components: {

@@ -40,10 +40,10 @@
 </template>
 
 <script>
-    import AuthInput from './AuthInput';
-    import AuthCloseBtn from './AuthCloseBtn';
+    import AuthInput from '../AuthInput';
+    import AuthCloseBtn from '../AuthCloseBtn';
 
-    const axios = require('axios');
+    import $axios from '../../axios'
 
     export default {
         name: "Auth",
@@ -62,11 +62,12 @@
         methods: {
             login () {
                 if(!this.checkForm()) return;
-                axios.post('https://webdev-api.loftschool.com/login', {
+                $axios.post('/login', {
                     name: this.user.login,
                     password: this.user.password
                 })
                     .then(function (response) {
+                        console.log(1);
                         localStorage.setItem('token', response.data.token);
                     })
                     .catch(function (error) {
@@ -100,82 +101,7 @@
 </script>
 
 <style lang="postcss" scoped>
-    @import "../../styles/mixins.pcss";
-
-    .auth__overlay {
-        width: 100%;
-        height: 100vh;
-        background-color: rgba(#2d3c4e, 0.9);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .auth__form {
-        max-width: 570px;
-        background-color: #ffffff;
-        padding: 60px 80px;
-        margin: auto;
-        position: relative;
-        @include phones {
-            max-width: initial;
-            position: fixed;
-            min-height: 100vh;
-            top: 0;
-            left: 0;
-            right: 0;
-            padding-left: 20px;
-            padding-right: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-    }
-
-    .auth__container {
-        display: flex;
-        flex-direction: column;
-    }
-    .auth__close {
-        position: absolute;
-        top: 30px;
-        right: 30px;
-    }
-    .auth__header {
-        font-size: 36px;
-        font-weight: 600;
-        text-align: center;
-        margin-bottom: 30px;
-    }
-
-    .auth__input {
-        margin-bottom: 30px;
-        &:last-of-type {
-            margin-bottom: 60px;
-        }
-    }
-    .auth__submit {
-        border-radius: 40px 5px;
-        color: $text-color-light;
-        background-image: linear-gradient(to right, #ad00ed 0%, #5500f2 100%);
-        padding: 30px 120px;
-        font-size: 18px;
-        font-weight: 700;
-        text-transform: uppercase;
-        display: flex;
-        justify-content: center;
-        margin: 0 auto;
-
-        &:hover {
-            background-image: linear-gradient(to right, #bb00ff 0%, #5900ff 100%);
-        }
-
-        @include phones {
-            padding: 30px 0;
-            width: 100%;
-            max-width: 260Px;
-        }
-
-    }
+    @import "../../../styles/mixins.pcss";
+    @import "../../assets/styles/auth.pcss";
 
 </style>
