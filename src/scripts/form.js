@@ -9,6 +9,34 @@ submitButton.addEventListener('click', function (evt) {
         return;
     }
 
+    const name = form.elements.name.value;
+    const phone = '911';
+    const comment = form.elements.message.value;
+    const mail = form.elements.email.value;
+
+    let formData = new FormData();
+
+    formData.append("name", name);
+    formData.append("phone", phone);
+    formData.append("comment", comment);
+    formData.append("to", mail);
+
+    fetch('https://webdev-api.loftschool.com/sendmail', {
+        method: 'POST',
+        body: formData
+    }).then((response) => {
+        return response.json();
+    }).then((info) => {
+        return info.message;
+    }).then((message) => {
+        showModal(message);
+        form.reset();
+        inputs.forEach((input)=> {
+            input.closest('.form__block').classList.remove('active');
+        })
+    }).catch(() => {
+        showModal('Что-то пошло не так...')
+    })
 
 });
 
@@ -30,15 +58,15 @@ inputs.forEach(input => {
 function checkForm() {
     let validity = true;
 
-    if (!checkInput(form.elements.name)) {
+    if (!checkInputAndToggleErrorClass(form.elements.name)) {
         validity = false;
     }
 
-    if (!checkInput(form.elements.email)) {
+    if (!checkInputAndToggleErrorClass(form.elements.email)) {
         validity = false;
     }
 
-    if (!checkInput(form.elements.message)) {
+    if (!checkInputAndToggleErrorClass(form.elements.message)) {
         validity = false;
     }
 
@@ -47,7 +75,7 @@ function checkForm() {
 }
 
 
-function checkInput(input) {
+function checkInputAndToggleErrorClass(input) {
     const inputWrapper = input.closest('.form__block');
     const errorWrapper = inputWrapper.querySelector('.form__error');
     if (!input.checkValidity()) {
@@ -60,4 +88,25 @@ function checkInput(input) {
         return true
     }
 
+}
+
+function showModal(msg) {
+    const container = document.querySelector('.wrapper');
+    const popup = document.createElement('div');
+
+    popup.classList.add('popup');
+    let innerMarkUp = document.querySelector('#form-popup').innerHTML;
+    popup.innerHTML = innerMarkUp;
+
+
+    container.appendChild(popup);
+    let popupText = popup.querySelector('.popup__content');
+    popupText.innerHTML = msg;
+
+    const closePopupButton = popup.querySelector('.popup__btn-close');
+
+    closePopupButton.addEventListener('click', function (evt) {
+        evt.preventDefault();
+        container.removeChild(popup);
+    })
 }
