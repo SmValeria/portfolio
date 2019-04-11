@@ -1,29 +1,25 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import Auth from './components/pages/Auth';
-import About from './components/pages/About';
-import Reviews from './components/pages/Reviews';
-import Works from './components/pages/Works';
 
 Vue.use(VueRouter);
 
 const routes = [
     {
         path: '/login',
-        component: Auth
+        component: () => import("./components/pages/Auth.vue")
     },
     {
-        path: '/about',
-        component: About
+        path: '/',
+        component: () => import("./components/pages/About")
     },
     {
         path: '/reviews',
-        component: Reviews
+        component: () => import("./components/pages/Reviews")
     },
     {
         path: '/works',
-        component: Works
+        component: () => import("./components/pages/Works")
     }
 ];
 

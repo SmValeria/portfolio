@@ -15,7 +15,7 @@
                     name="login"
                     id="login"
                     label="Логин"
-                    v-model="user.login"
+                    v-model="user.name"
                     error="Введите логин"
                     @focus="addActiveClassInput"
                     @blur="removeActiveClassInput"
@@ -40,44 +40,40 @@
 </template>
 
 <script>
-    import AuthInput from '../AuthInput';
-    import AuthCloseBtn from '../AuthCloseBtn';
-
-    import $axios from '../../axios'
+    import $axios from '@/axios'
 
     export default {
         name: "Auth",
         components: {
-            AuthInput,
-            AuthCloseBtn
+            AuthInput: () => import("../AuthInput"),
+            AuthCloseBtn: () => import("../AuthCloseBtn")
         },
         data() {
             return {
                 user: {
-                    login: "",
+                    name: "",
                     password: "",
                 }
             }
         },
         methods: {
-            login () {
+            async login () {
                 if(!this.checkForm()) return;
-                $axios.post('/login', {
-                    name: this.user.login,
-                    password: this.user.password
-                })
-                    .then(function (response) {
-                        console.log(1);
-                        localStorage.setItem('token', response.data.token);
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+                try {
+                   const {
+                       data: {token}
+                   } = await $axios.post('/login', this.user);
 
+                   localStorage.setItem('token', token);
+                   $axios.defaults.headers['Authorization'] = `Bearer${token}`;
+                   this.$router.replace('/');
+               } catch (error) {
+                    console.log(error);
+               }
             },
             checkForm () {
                 let validity = true;
-                if (!this.user.login) {
+                if (!this.user.name) {
                     document.querySelector('.auth__input--login').classList.add('error');
                     validity = false;
                 }

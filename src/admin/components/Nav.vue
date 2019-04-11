@@ -7,7 +7,8 @@
                     tag="li"
                     class="nav__item"
                     :to="item.value"
-                    :key="item.id")
+                    :key="item.id"
+                    exact-active-class="active")
                         a.nav__link(href="#") {{ item.title }}
 </template>
 
@@ -24,9 +25,6 @@
         },
         watch: {
 
-        },
-        mounted() {
-            console.log(this.$router);
         }
     }
 </script>

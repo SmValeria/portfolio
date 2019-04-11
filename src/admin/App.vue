@@ -29,12 +29,12 @@
     export default {
         data() {
             return {
-                isUserLogged: false,
+                isUserLogged: true,
                 activeTab: '/admin/about',
                 activeTabTitle: 'Обо мне',
                 menu: [
                     {
-                        value: '/about',
+                        value: '/',
                         title: 'Обо мне'
                     },
                     {
