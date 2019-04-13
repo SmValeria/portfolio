@@ -1,61 +1,50 @@
 <template lang="pug">
     .admin
-        template(v-if="isUserLogged")
+        template(v-if="$route.meta.public")
+            Auth
+        template(v-else-if="userIsLogged")
             .admin__content
                 Header
-                Nav(
-                :active="activeTab"
-                :menu="menu")
+                Nav
                 .page
                     .page__container.container
                         PageTitle(
-                        :title="activeTabTitle"
+                        :title="title"
                         )
                         .page__maincontent
                             router-view
-        template(v-else)
-            Auth
+
 
 </template>
 <script>
-    import Auth from './components/pages/Auth'
-    import Header from './components/Header'
-    import Nav from './components/Nav'
-    import PageTitle from './components/PageTitle'
-    import About from './components/pages/About'
-    import Works from './components/pages/Works'
-    import Reviews from './components/pages/Reviews'
+
+    import { mapGetters } from 'vuex';
 
     export default {
         data() {
             return {
-                isUserLogged: true,
-                activeTab: '/admin/about',
-                activeTabTitle: 'Обо мне',
-                menu: [
-                    {
-                        value: '/',
-                        title: 'Обо мне'
-                    },
-                    {
-                        value: '/works',
-                        title: 'Работы'
-                    },
-                    {
-                        value: '/reviews',
-                        title: 'Отзывы'
-                    }
-                ]
+                title: ''
             }
         },
         components: {
-            Auth,
-            Header,
-            Nav,
-            PageTitle,
-            About,
-            Works,
-            Reviews
+            Auth: () => import("./components/pages/Auth"),
+            Header: () => import("./components/Header"),
+            Nav: () => import("./components/Nav"),
+            PageTitle: () => import("./components/PageTitle"),
+            About: () => import("./components/pages/About"),
+            Works: () => import("./components/pages/Works"),
+            Reviews: () => import("./components/pages/Reviews")
+        },
+        computed: {
+            ...mapGetters("user", ["userIsLogged"])
+        },
+        watch: {
+            $route: function(route) {
+                this.title = route.meta.title;
+            }
+        },
+        created() {
+            this.title = this.$route.meta.title;
         }
     }
 </script>

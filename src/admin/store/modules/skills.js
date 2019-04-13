@@ -29,9 +29,9 @@ export default {
                 )
             }
         },
-        async fetchSkills({commit}, skill) {
+        async fetchSkills({commit}) {
             try {
-                const response = await this.$axios.get('/skills/117', skill);
+                const response = await this.$axios.get('/skills/117');
                 commit('SET_SKILLS', response.data);
                 return response;
             } catch (error) {

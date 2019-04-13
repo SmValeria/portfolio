@@ -12,6 +12,9 @@
     }
 </script>
 
-<style scoped>
-
+<style lang="postcss" scoped>
+    .admin-btn--block:disabled {
+        opacity: 0.8;
+        cursor: initial;
+    }
 </style>

@@ -15,16 +15,23 @@
 <script>
     export default {
         name: "Nav",
-        props: {
-            active: String,
-            menu: Array
-        },
         data() {
             return {
+                menu: [
+                    {
+                        value: '/',
+                        title: 'Обо мне'
+                    },
+                    {
+                        value: '/works',
+                        title: 'Работы'
+                    },
+                    {
+                        value: '/reviews',
+                        title: 'Отзывы'
+                    }
+                ]
             }
-        },
-        watch: {
-
         }
     }
 </script>

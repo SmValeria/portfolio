@@ -1,71 +1,56 @@
 <template lang="pug">
     ul.work__lists
         li.work__item
-            AddItem Добавить
+            AddItem(
+            @click.native="$emit('addNewWork')"
+            :disabled="isFormShow"
+            ) Добавить
                     br
                     |работу
-        li.work__item.card.work__bg-img.edit(
-        style="background-image: url(/src/images/preview/1.jpg)")
-            .work__data
-                .work__header.card__title Сайт школы образования
-                .work__text
-                    p Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
-                a(
-                href="#"
-                target="_blank"
-                ).work__link http://loftschool.ru
-            .work__controls
-                button(
-                type="button"
-                ).card__edit.icon__pencil.work__edit.work__btn Править
-                button(
-                type="button"
-                ).card__delete.icon__delete.work__delete.work__btn Удалить
-            .work__overlay
-        li.work__item.card.work__bg-img(
-        style="background-image: url(/src/images/preview/2.jpg)")
-            .work__data
-                .work__header.card__title Сайт школы образования
-                .work__text
-                    p Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
-                a(
-                href="#"
-                target="_blank"
-                ).work__link http://loftschool.ru
-            .work__controls
-                button(
-                type="button"
-                ).card__edit.icon__pencil.work__edit.work__btn Править
-                button(
-                type="button"
-                ).card__delete.icon__delete.work__delete.work__btn Удалить
-            .work__overlay
-        li.work__item.card.work__bg-img(
-        style="background-image: url(/src/images/preview/3.jpg)")
-            .work__data
-                .work__header.card__title Сайт школы образования
-                .work__text
-                    p Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
-                a(
-                href="#"
-                target="_blank"
-                ).work__link http://loftschool.ru
-            .work__controls
-                button(
-                type="button"
-                ).card__edit.icon__pencil.work__edit.work__btn Править
-                button(
-                type="button"
-                ).card__delete.icon__delete.work__delete.work__btn Удалить
-            .work__overlay
+        WorkItem(
+        v-for="work in works"
+        :key="work.id"
+        :work="work"
+        @editCurrentWork="editWork"
+        :isFormShow="isFormShow"
+        :class="{edit: isFormShow && editWorkId === work.id}"
+        )
+
 </template>
 
 <script>
-    import AddItem from './AddItem'
+    import { mapActions, mapState } from "vuex";
+
     export default {
         name: "WorkList",
+        props: {
+            isFormShow: Boolean,
+            editWorkId: {
+                validator: prop => typeof prop === 'number' || prop === null
+            }
+        },
+
         components: {
-            AddItem
+            AddItem: () => import("./AddItem"),
+            WorkItem: () => import("./WorkItem"),
+        },
+        computed: {
+            ...mapState('works', {
+                works: state => state.works,
+            }),
+        },
+        methods: {
+            ...mapActions('works', ['fetchWorks']),
+            editWork(editedWork) {
+             this.$emit('editWork', editedWork)
+            }
+        },
+        async created() {
+            try {
+                await this.fetchWorks();
+            } catch (error) {
+                console.log('error on load works');
+            }
         }
     }
 </script>
