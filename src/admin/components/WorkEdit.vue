@@ -1,6 +1,5 @@
 <template lang="pug">
     .card.work__edit-card
-        pre {{ work }}}
         header.card__header
             .card__title {{ formTitle }}
         form.card__content--bigpd.work__edit-content(

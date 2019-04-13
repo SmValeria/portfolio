@@ -1,4 +1,7 @@
-import Vue from "vue"
+import Vue from "vue";
+import axios from 'axios';
+
+axios.defaults.baseURL = 'https://webdev-api.loftschool.com';
 
 const thumbs = {
     template: "#slider-thumbs",
@@ -57,7 +60,7 @@ const info = {
     },
     computed: {
         tagsArray(){
-            return this.currentWork.skills.split(",")
+            return this.currentWork.techs.split(", ")
         }
     }
 };
@@ -109,9 +112,10 @@ new Vue({
             if (value < 0) this.currentIndex = 0;
         },
         makeArrWithRequiredPathImages(data) {
+            const baseUrl = axios.defaults.baseURL;
             return data.map(item => {
-                const requiredPic = require(`../images/${item.path}`);
-                item.path = requiredPic;
+                const requiredPic = `${baseUrl}/${item.photo}`;
+                item.photo = requiredPic;
 
                 return item;
             });
@@ -130,10 +134,28 @@ new Vue({
         },
         setSlide(index) {
             this.currentIndex = index;
-        }
+        },
+        async fetchWorks() {
+            try {
+                const response = await axios.get('/works/117');
+                this.works = response.data;
+                return response;
+            } catch (error) {
+                throw new Error(
+                    error.response.data.error || error.response.data.message
+                )
+
+            }
+        },
     },
-    created() {
-        const data = require("../data/work.json");
-        this.works = this.makeArrWithRequiredPathImages(data);
+    async created() {
+        try {
+            await this.fetchWorks();
+        } catch (error) {
+            console.log('error on load works');
+        }
+        this.works = this.makeArrWithRequiredPathImages(this.works);
+        console.log(1, this.works);
     }
+
 });
