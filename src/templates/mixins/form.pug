@@ -3,16 +3,16 @@ mixin form(className)
         form.form__container(action="" method="")
             .form__row
                 .form__block.form__el
-                    label.form__title(for="name") Введите ваше имя
-                    .form__input-wr
+                    .form__title Введите ваше имя
+                    label.form__input-wr
                         +icon('user', 'form__icon')
                         input.form__input#name(name="name"
                         type="text"
                         required)
                     .form__error.hidden
                 .form__block.form__el
-                    label.form__title(for="email") Введите ваш email
-                    .form__input-wr
+                    .form__title Введите ваш email
+                    label.form__input-wr
                         +icon('envelope', 'form__icon')
                         input.form__input#email(name="email"
                         type="email"
@@ -20,8 +20,8 @@ mixin form(className)
                     .form__error.hidden
             .form__row
                 .form__block.form__el
-                    label.form__title(for="message") Сообщение к письму
-                    .form__input-wr
+                    .form__title Сообщение к письму
+                    label.form__input-wr
                         +icon('message', 'form__icon')
                         textarea.form__input.form__textarea#message(
                         name="message"
@@ -29,4 +29,10 @@ mixin form(className)
                         required
                         rows="2")
                     .form__error.hidden
-            button.form__submit.form__el(type="submit") Отправить
+            button.form__submit.form__el.btn-gradient(type="submit") Отправить
+
+    script(type="text/x-template")#form-popup
+        .popup__overlay
+            .popup__container
+                .popup__content
+                button.popup__btn-close.btn-gradient Закрыть
