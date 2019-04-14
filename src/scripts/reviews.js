@@ -61,6 +61,5 @@ new Vue({
             console.log('error on load works');
         }
         this.reviews = this.makeArrWithRequiredPathImages(this.reviews);
-        console.log(2, this.reviews);
     }
 });

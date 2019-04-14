@@ -5,10 +5,12 @@
                 form.auth__container(
                 action=""
                 method=""
-                @submit.prevent="login"
+                @submit.prevent="auth"
                 novalidate="true"
                 )
-                    AuthCloseBtn.auth__close
+                    AuthCloseBtn(
+                    @click.native="toMain"
+                    ).auth__close
                     .auth__header Авторизация
                     AuthInput(
                     type="text"
@@ -41,7 +43,7 @@
 
 <script>
     import $axios from '@/axios'
-
+    import { mapActions } from 'vuex'
     export default {
         name: "Auth",
         components: {
@@ -57,15 +59,11 @@
             }
         },
         methods: {
-            async login () {
+            ...mapActions('user', ['login']),
+            async auth () {
                 if(!this.checkForm()) return;
                 try {
-                   const {
-                       data: {token}
-                   } = await $axios.post('/login', this.user);
-
-                   localStorage.setItem('token', token);
-                   $axios.defaults.headers['Authorization'] = `Bearer${token}`;
+                    await this.login(this.user);
                    this.$router.replace('/');
                } catch (error) {
                     console.log(error);
@@ -91,6 +89,12 @@
                 if(!event.target.value) {
                     event.target.closest('.auth__input').classList.remove('active');
                 }
+            },
+            toMain() {
+                const rootPath = location.protocol + '//' + location.host;
+
+                window.location.replace(rootPath);
+
             }
         }
     }

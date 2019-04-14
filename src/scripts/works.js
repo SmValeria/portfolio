@@ -155,7 +155,6 @@ new Vue({
             console.log('error on load works');
         }
         this.works = this.makeArrWithRequiredPathImages(this.works);
-        console.log(1, this.works);
     }
 
 });
