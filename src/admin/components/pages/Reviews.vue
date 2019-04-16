@@ -28,7 +28,7 @@
                 mode: "add",
                 review: {
                     id: null,
-                    photo: "",
+                    photo: null,
                     author: "",
                     occ: "",
                     text: ""
@@ -49,7 +49,7 @@
             handleDeleteForm() {
                 this.review = {
                     id: null,
-                    photo: "",
+                    photo: null,
                     author: "",
                     occ: "",
                     text: ""

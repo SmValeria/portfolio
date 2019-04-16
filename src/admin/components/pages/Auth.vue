@@ -37,6 +37,7 @@
 
                     button.auth__submit(
                     type="submit"
+                    :disable="disable"
                     ) Отправить
 
 </template>
@@ -55,18 +56,21 @@
                 user: {
                     name: "",
                     password: "",
-                }
+                },
+                disable: true
             }
         },
         methods: {
             ...mapActions('user', ['login']),
             async auth () {
                 if(!this.checkForm()) return;
+                this.disable = false;
                 try {
                     await this.login(this.user);
                    this.$router.replace('/');
                } catch (error) {
                     console.log(error);
+                    this.disable = true;
                }
             },
             checkForm () {

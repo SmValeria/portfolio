@@ -5,6 +5,7 @@
         form.card__content--bigpd.work__edit-content(
             @reset.prevent="$emit('deleteFormWork')"
             @submit.prevent="mode === 'add' ? addNewWork() : editCurrentWork()"
+            novalidate="true"
         )
             .work__appearance
                 .work__file-box.file-box(
@@ -14,14 +15,15 @@
                     .file-box__content-wr(v-if="isAddPhoto === false")
                         .file-box__title
                             |Перетащите или загрузите для загрузки изображения
-                        label(
+                        label.check(
+                        :class="{error: validation.hasError('work.photo')}"
                         for="work-img"
                         ).admin-btn Загрузить
+                            .check__error {{validation.firstError('work.photo')}}
                         input.file-box__input.visuallyhidden(
                         type="file"
                         id="work-img"
                         name="work-img"
-                        required
                         @change="appendFileAndRenderPhoto"
                         )
                 .work__file-box-upload(v-if="isAddPhoto")
@@ -36,53 +38,60 @@
                     )
             .work__info
                 .work__row
-                    .card__title.underline
+                    .card__title.underline.check(
+                    :class="{error: validation.hasError('work.title')}"
+                    )
                         label.card__label(
                         for="work-title"
                         ) Название
                         input.card__input.work__input(
                         type="text"
-                        required
                         v-model="work.title"
                         id="work-title"
                         name="work-title"
                         )
+                        .check__error {{validation.firstError('work.title')}}
                 .work__row
-                    .card__title.underline
+                    .card__title.underline.check(
+                    :class="{error: validation.hasError('work.link')}"
+                    )
                         label.card__label(
                         for="work-link"
                         ) Ссылка
                         input.card__input.work__input(
                         type="url"
-                        required
-                        pattern="https?://.+"
                         v-model="work.link"
                         id="work-link"
                         name="work-link"
                         )
+                        .check__error {{validation.firstError('work.link')}}
                 .work__row
-                    .card__title
+                    .card__title.check(
+                    :class="{error: validation.hasError('work.description')}"
+                    )
                         label.card__label(
                         for="work-desc"
                         ) Описание
                         textarea.card__input.card__textarea.work__input(
                         id="work-desc"
-                        required
                         name="work-desc"
                         v-model="work.description"
                         )
+                        .check__error {{validation.firstError('work.description')}}
                 .work__row
-                    .card__title.underline
+                    .card__title.underline.check(
+                    :class="{error: validation.hasError('work.techs')}"
+                    )
                         label.card__label(
                         for="work-tags"
                         ) Добавление тэга
                         input.card__input.work__input(
                         type="text"
-                        required
                         v-model="work.techs"
                         id="work-tags"
                         name="work-tags"
                         )
+                        .check__error {{validation.firstError('work.techs')}}
                 .work__row
                     ul.admin-tags(v-if="tagArray.length")
                         li.admin-tags__item(v-for="(tag, index) in tagArray" :key="index")
@@ -106,8 +115,36 @@
 <script>
     import { mapActions } from 'vuex';
     import $axios from '../axios';
+    import { Validator } from 'simple-vue-validator';
 
     export default {
+        mixins: [require('simple-vue-validator').mixin],
+        validators: {
+            "work.title": value => {
+                return Validator.value(value).required("Введите название работы");
+            },
+            "work.link": value => {
+                return Validator.value(value)
+                    .url("Значение должно быть ссылкой")
+                    .required("Введите ссылку на проект");
+            },
+            "work.description": value => {
+                return Validator.value(value)
+                    .required("Введите описание работы");
+            },
+            "work.techs": value => {
+                return Validator.value(value)
+                    .required("Введите используемые навыки");
+            },
+            "work.photo": function (value) {
+                return Validator.custom(function () {
+                    if (!value) {
+                        return "Загрузите изображение работы"
+
+                    }
+                });
+            }
+        },
         name: "WorkEdit",
         props: {
             mode: String,
@@ -154,6 +191,7 @@
                 this.work.techs = copyTagsArray.join(", ");
             },
             async addNewWork(){
+                if ((await this.$validate()) === false) return;
                 try {
                     await this.addWork(this.work);
                     this.$emit('deleteFormWork');
@@ -170,6 +208,7 @@
 
             },
             async editCurrentWork () {
+                if ((await this.$validate()) === false) return;
                 try {
                     await this.editWork(this.work);
                     this.$emit('deleteFormWork');

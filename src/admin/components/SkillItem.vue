@@ -1,8 +1,10 @@
 <template lang="pug">
     li.skill__item(v-if="editMode === false")
-        .skill__title {{ skill.title }}
-        .skill__percent {{ skill.percent }}
-            span %
+        .skill__title
+            .skill__input {{ skill.title }}
+        .skill__percent
+            .skill__input {{ skill.percent }}
+                span %
         button(
         type="button"
         @click="editMode=true"
@@ -13,8 +15,16 @@
         ).skill__remove.icon__trash
 
     li.skill__item.edit(v-else)
-        input(type="text" v-model="editedSkill.title").skill__title.underline
-        input(type="number" v-model="editedSkill.percent").skill__percent.underline
+        .skill__title.underline.check(
+        :class="{error: validation.hasError('editedSkill.title')}"
+        )
+            input(type="text" v-model="editedSkill.title").skill__input
+            .check__error {{validation.firstError('editedSkill.title')}}
+        .skill__percent.underline.check(
+        :class="{error: validation.hasError('editedSkill.percent')}"
+        )
+            input(type="number" v-model="editedSkill.percent").skill__input
+            .check__error {{validation.firstError('editedSkill.percent')}}
 
         button(
         type="button"
@@ -28,7 +38,20 @@
 
 <script>
     import { mapActions } from "vuex";
+    import { Validator } from 'simple-vue-validator';
+
     export default {
+        mixins: [require('simple-vue-validator').mixin],
+        validators: {
+            "editedSkill.title": value => {
+                return Validator.value(value).required("Введите название навыка");
+            },
+            "editedSkill.percent": value => {
+                return Validator.value(value)
+                    .between(0, 100, "Введите процент от 0 до 100")
+                    .required("Введите процент владения навыком");
+            },
+        },
         name: "SkillItem",
         props: {
             skill: Object
@@ -57,6 +80,7 @@
                 }
             },
             async saveEditSkill() {
+                if ((await this.$validate()) === false) return;
                 try {
                     await this.editSkill(this.editedSkill);
                     this.editMode=false;

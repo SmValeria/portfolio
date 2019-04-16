@@ -13,20 +13,24 @@
                         :class="{filled : isAddPhoto}"
                         :style="{'backgroundImage': `url(${this.renderPhotoUrl})`}"
                         )
-                    label(
+                    label.check(
+                    :class="{error: validation.hasError('review.photo')}"
                     for="review-img"
                     ).admin-btn--string.review__download-label {{ imageOperation }}
+                        .check__error {{validation.firstError('review.photo')}}
                     input.review__download.visuallyhidden(
                     type="file"
                     id="review-img"
                     name="review-img"
-                    :required="mode==='add'"
                     @change="appendFileAndRenderPhoto"
                     )
 
+
             .review__info
                 .review__row
-                    .card__title.underline
+                    .card__title.underline.check(
+                    :class="{error: validation.hasError('review.author')}"
+                    )
                         label.card__label(
                         for="review-author"
                         ) Имя автора
@@ -35,10 +39,12 @@
                         id="review-author"
                         name="review-author"
                         v-model="review.author"
-                        required
                         )
+                        .check__error {{validation.firstError('review.author')}}
                 .review__row
-                    .card__title.underline
+                    .card__title.underline.check(
+                        :class="{error: validation.hasError('review.occ')}"
+                    )
                         label.card__label(
                         for="review-author-occ"
                         ) Титул автора
@@ -47,10 +53,12 @@
                         id="review-author-occ"
                         name="review-author-occ"
                         v-model="review.occ"
-                        required
                         )
+                        .check__error {{validation.firstError('review.occ')}}
                 .review__row
-                    .card__title
+                    .card__title.check(
+                        :class="{error: validation.hasError('review.text')}"
+                    )
                         label.card__label(
                         for="review-text"
                         ) Отзыв
@@ -58,9 +66,9 @@
                         id="review-text"
                         name="review-text"
                         rows="4"
-                        required
                         v-model="review.text"
                         )
+                        .check__error {{validation.firstError('review.text')}}
                 .review__row
                     .review__serve
                         button(
@@ -76,8 +84,31 @@
 <script>
     import { mapActions } from 'vuex';
     import $axios from '../axios';
+    import { Validator } from 'simple-vue-validator';
 
     export default {
+        mixins: [require('simple-vue-validator').mixin],
+        validators: {
+            "review.author": value => {
+                return Validator.value(value).required("Введите имя автора");
+            },
+            "review.occ": value => {
+                return Validator.value(value)
+                    .required("Введите должность автора");
+            },
+            "review.text": value => {
+                return Validator.value(value)
+                    .required("Введите текст отзыва");
+            },
+            "review.photo": function (value) {
+                return Validator.custom(function () {
+                    if (!value) {
+                        return "Загрузите аватар"
+
+                    }
+                });
+            }
+        },
         name: "ReviewEdit",
         props: {
             mode: String,
@@ -118,6 +149,7 @@
                 }
             },
             async addNewReview(){
+                if ((await this.$validate()) === false) return;
                 try {
                     await this.addReview(this.review);
                     this.$emit('deleteFormReview');
@@ -134,6 +166,7 @@
 
             },
             async editCurrentReview () {
+                if ((await this.$validate()) === false) return;
                 try {
                     await this.editReview(this.review);
                     this.$emit('deleteFormReview');

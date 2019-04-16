@@ -31,19 +31,25 @@
                 )
 
         .card__footer
-            .card__add-skill.underline
+            .card__add-skill.underline.check(
+            :class="{error: validation.hasError('skill.title')}"
+            )
                 input.card__input(
                 type="text"
                 placeholder="Новый навык"
                 v-model="skill.title"
                 )
-            .card__add-percent.underline
+                .check__error {{validation.firstError('skill.title')}}
+            .card__add-percent.underline.check(
+            :class="{error: validation.hasError('skill.percent')}"
+            )
                 input.card__input(
                 type="number"
                 placeholder="100 %"
                 max="100"
                 v-model="skill.percent"
                 )
+                .check__error {{validation.firstError('skill.percent')}}
             .card__add-item
                 AddButton(
                 class="card__add-btn add-btn--big"
@@ -53,7 +59,20 @@
 
 <script>
     import { mapActions } from "vuex";
+    import { Validator } from 'simple-vue-validator';
+
     export default {
+        mixins: [require('simple-vue-validator').mixin],
+        validators: {
+            "skill.title": value => {
+                return Validator.value(value).required("Введите название навыка");
+            },
+            "skill.percent": value => {
+                return Validator.value(value)
+                    .between(0, 100, "Введите процент от 0 до 100")
+                    .required("Введите процент владения навыком");
+            },
+        },
         name: "SkillGroup",
         props: {
             category: Object,
@@ -79,6 +98,7 @@
             ...mapActions('skills', ['addSkill']),
             ...mapActions('tooltip', ["handleTooltip"]),
             async addNewSkill() {
+                if ((await this.$validate()) === false) return;
                 try {
                     await this.addSkill(this.skill);
                     this.skill.title="";
@@ -92,6 +112,8 @@
                         type: "error",
                         text: "error.message"
                     })
+                } finally {
+                    this.validation.reset();
                 }
             },
             async deleteCurrentCategory() {

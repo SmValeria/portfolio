@@ -31,7 +31,7 @@
                     title: "",
                     techs: "",
                     link: "",
-                    photo: "",
+                    photo: null,
                     description: ""
                 },
             }
@@ -53,7 +53,7 @@
                     title: "",
                     techs: "",
                     link: "",
-                    photo: "",
+                    photo: null,
                     description: ""
                 };
                 this.showForm = false;

@@ -31,7 +31,7 @@
         display: flex;
         justify-content: space-between;
         margin: 0 auto;
-        padding: 25px;
+        padding: 20px 25px;
         font-size: 18px;
         color: $text-color-light;
         &.success {
