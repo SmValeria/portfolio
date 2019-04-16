@@ -67,7 +67,6 @@ export default {
                     title: `${category.category}`
                 });
                 commit('EDIT_CATEGORY', category);
-                console.log(response.data);
                 return response;
             } catch (error) {
                 throw new Error(

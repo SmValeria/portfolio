@@ -46,13 +46,21 @@
         },
         methods: {
             ...mapActions('categories', ['addNewSkillGroup']),
+            ...mapActions('tooltip', ["handleTooltip"]),
             async addSkillGroup(){
                 try {
                     await this.addNewSkillGroup(this.skillTitle);
                     this.skillTitle = "";
                     this.$emit('deleteForm');
+                    this.handleTooltip({
+                        type: "success",
+                        text: "Новая категория добавлена"
+                    })
                 } catch (error) {
-                    console.log(error.message);
+                    this.handleTooltip({
+                        type: "error",
+                        text: "error.message"
+                    })
                 }
 
             }

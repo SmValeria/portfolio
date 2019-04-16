@@ -100,6 +100,7 @@
         },
         methods: {
             ...mapActions('reviews', ['addReview', 'editReview']),
+            ...mapActions('tooltip', ["handleTooltip"]),
             appendFileAndRenderPhoto(e) {
                 const file = e.target.files[0];
                 this.review.photo = file;
@@ -120,8 +121,15 @@
                 try {
                     await this.addReview(this.review);
                     this.$emit('deleteFormReview');
+                    this.handleTooltip({
+                        type: "success",
+                        text: "Отзыв добавлен"
+                    })
                 } catch (error) {
-                    console.log(error.message);
+                    this.handleTooltip({
+                        type: "error",
+                        text: "error.message"
+                    })
                 }
 
             },
@@ -129,8 +137,15 @@
                 try {
                     await this.editReview(this.review);
                     this.$emit('deleteFormReview');
+                    this.handleTooltip({
+                        type: "success",
+                        text: "Отзыв изменен"
+                    })
                 } catch (error) {
-                    console.log(error);
+                    this.handleTooltip({
+                        type: "error",
+                        text: "error.message"
+                    })
                 }
             }
         },

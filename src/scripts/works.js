@@ -17,7 +17,6 @@ const controls = {
         works: Array,
         currentWork: Object,
         currentIndex: Number,
-        lastIndexOfWorkArray: Number
     }
 };
 
@@ -31,15 +30,6 @@ const display = {
         works: Array,
         currentWork: Object,
         currentIndex: Number
-    },
-    computed: {
-        reverseWorks(){
-            const works = [...this.works];
-            return works.reverse();
-        },
-        lastIndexOfWorkArray() {
-            return this.works.length -1;
-        }
     }
 };
 
@@ -80,37 +70,10 @@ new Vue({
     },
     computed: {
         currentWork(){
-            return this.works[this.currentIndex]
-        }
-    },
-    watch: {
-        currentIndex(value) {
-            this.makeLimitedLoopForCurIndex(value);
+            return this.works[0]
         }
     },
     methods: {
-        reRenderThumbnails(index) {
-            const container = document.querySelector('.thumbnail');
-            const containerHeight = container.offsetHeight;
-            const list = container.querySelector('.thumbnail__list');
-            const itemHeight = list.querySelector('.thumbnail__item').offsetHeight;
-            const countVisibleItems =  (containerHeight / itemHeight) - 1;
-
-            if (index === this.works.length) return;
-            if(index <= countVisibleItems) {
-                list.style.transform = `translateY(0px)`;
-                return
-            }
-            let offset = (index - countVisibleItems) * itemHeight;
-
-            list.style.transform = `translateY(${offset}px)`;
-
-        },
-        makeLimitedLoopForCurIndex(value) {
-            const worksAmount = this.works.length - 1;
-            if (value > worksAmount) this.currentIndex = worksAmount;
-            if (value < 0) this.currentIndex = 0;
-        },
         makeArrWithRequiredPathImages(data) {
             const baseUrl = axios.defaults.baseURL;
             return data.map(item => {
@@ -123,18 +86,16 @@ new Vue({
         handleSlide(direction) {
             switch (direction) {
                 case 'next':
-                    this.currentIndex++;
+                    const lastSlide = this.works.pop();
+                    this.works.unshift(lastSlide);
                     break;
                 case 'prev':
-                    this.currentIndex--;
+                    const firstSlide= this.works.shift();
+                    this.works.push(firstSlide);
                     break;
             }
+        },
 
-            this.reRenderThumbnails(this.currentIndex);
-        },
-        setSlide(index) {
-            this.currentIndex = index;
-        },
         async fetchWorks() {
             try {
                 const response = await axios.get('/works/117');

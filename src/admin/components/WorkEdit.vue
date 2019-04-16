@@ -131,6 +131,7 @@
         },
         methods: {
             ...mapActions('works', ['addWork', 'editWork']),
+            ...mapActions('tooltip', ["handleTooltip"]),
             appendFileAndRenderPhoto(e) {
                 const file = e.target.files[0];
                 this.work.photo = file;
@@ -156,8 +157,15 @@
                 try {
                     await this.addWork(this.work);
                     this.$emit('deleteFormWork');
+                    this.handleTooltip({
+                        type: "success",
+                        text: "Работа добавлена"
+                    })
                 } catch (error) {
-                    console.log(error.message);
+                    this.handleTooltip({
+                        type: "error",
+                        text: "error.message"
+                    })
                 }
 
             },
@@ -165,8 +173,15 @@
                 try {
                     await this.editWork(this.work);
                     this.$emit('deleteFormWork');
+                    this.handleTooltip({
+                        type: "success",
+                        text: "Работа изменена"
+                    })
                 } catch (error) {
-                    console.log(error);
+                    this.handleTooltip({
+                        type: "error",
+                        text: "error.message"
+                    })
                 }
             }
         },

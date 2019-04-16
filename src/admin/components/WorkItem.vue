@@ -54,11 +54,19 @@
         },
         methods: {
             ...mapActions('works', ['removeWork']),
+            ...mapActions('tooltip', ["handleTooltip"]),
             async removeCurrentWork() {
                 try {
                     await this.removeWork(this.work.id);
+                    this.handleTooltip({
+                        type: "success",
+                        text: "Работа удалена"
+                    })
                 } catch (error) {
-                    console.log(error)
+                    this.handleTooltip({
+                        type: "error",
+                        text: "error.message"
+                    })
                 }
             },
             getAbsoluteImgPath(imgPath) {

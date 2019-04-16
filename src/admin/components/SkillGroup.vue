@@ -77,28 +77,50 @@
         methods: {
             ...mapActions('categories', ['removeCategory', 'editCategory']),
             ...mapActions('skills', ['addSkill']),
+            ...mapActions('tooltip', ["handleTooltip"]),
             async addNewSkill() {
                 try {
                     await this.addSkill(this.skill);
                     this.skill.title="";
                     this.skill.percent="";
+                    this.handleTooltip({
+                        type: "success",
+                        text: "Новый навык добавлен"
+                    })
                 } catch (error) {
-                    console.log(error);
+                    this.handleTooltip({
+                        type: "error",
+                        text: "error.message"
+                    })
                 }
             },
             async deleteCurrentCategory() {
                 try {
                     await this.removeCategory(this.category.id);
+                    this.handleTooltip({
+                        type: "success",
+                        text: "Категория удалена"
+                    })
                 } catch (error) {
-                    console.log(error);
+                    this.handleTooltip({
+                        type: "error",
+                        text: "error.message"
+                    })
                 }
             },
             async saveEditCategory () {
                 try {
                     await this.editCategory(this.editedCategory);
                     this.editCategoryMode = false;
+                    this.handleTooltip({
+                        type: "success",
+                        text: "Имя категрии обновлено"
+                    })
                 } catch (error) {
-                    console.log(error);
+                    this.handleTooltip({
+                        type: "error",
+                        text: "error.message"
+                    })
                 }
             }
         }

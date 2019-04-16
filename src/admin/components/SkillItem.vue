@@ -41,19 +41,34 @@
         },
         methods: {
             ...mapActions('skills', ['removeSkill', 'editSkill']),
+            ...mapActions('tooltip', ["handleTooltip"]),
             async removeCurrentSkill() {
                 try {
                    await this.removeSkill(this.skill.id);
+                    this.handleTooltip({
+                        type: "success",
+                        text: "Навык удален"
+                    })
                 } catch (error) {
-                    console.log(error)
+                    this.handleTooltip({
+                        type: "error",
+                        text: "error.message"
+                    })
                 }
             },
             async saveEditSkill() {
                 try {
                     await this.editSkill(this.editedSkill);
                     this.editMode=false;
+                    this.handleTooltip({
+                        type: "success",
+                        text: "Навык изменен"
+                    })
                 } catch (error) {
-                    console.log(error)
+                    this.handleTooltip({
+                        type: "error",
+                        text: "error.message"
+                    })
                 }
             },
         }

@@ -13,12 +13,14 @@
                         )
                         .page__maincontent
                             router-view
+        transition(name="show-tooltip")
+            Tooltip.tooltip(v-if="show")
 
 
 </template>
 <script>
 
-    import { mapGetters } from 'vuex';
+    import { mapGetters, mapState, mapActions } from 'vuex';
 
     export default {
         data() {
@@ -33,9 +35,13 @@
             PageTitle: () => import("./components/PageTitle"),
             About: () => import("./components/pages/About"),
             Works: () => import("./components/pages/Works"),
-            Reviews: () => import("./components/pages/Reviews")
+            Reviews: () => import("./components/pages/Reviews"),
+            Tooltip: () => import("./components/Tooltip"),
         },
         computed: {
+            ...mapState("tooltip", {
+                show: state => state.show
+            }),
             ...mapGetters("user", ["userIsLogged"])
         },
         watch: {
@@ -68,5 +74,17 @@
         grid-template-columns: 1fr;
         grid-template-rows: auto auto 1fr;
         background-color: rgba($text-color-light, 0.9);
+    }
+    .tooltip {
+        position: fixed;
+        left: 50%;
+        bottom: 0;
+        transform: translate(-50%, 0);
+    }
+    .show-tooltip-enter-active, .show-tooltip-leave-active {
+        transition: transform 0.2s;
+    }
+    .show-tooltip-enter, .show-tooltip-leave-to {
+        transform: translate(-50%, 100%);
     }
 </style>

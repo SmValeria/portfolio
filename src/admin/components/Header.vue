@@ -26,9 +26,8 @@
         methods: {
             ...mapActions('user', ['logout']),
             async authOut () {
-                console.log('adfasf');
                 try {
-                    await this.logout;
+                    await this.logout();
                     this.$router.replace('/login');
                 } catch (error) {
                     console.log(error);

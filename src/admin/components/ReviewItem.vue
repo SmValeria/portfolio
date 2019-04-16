@@ -48,11 +48,19 @@
         },
         methods: {
             ...mapActions('reviews', ['removeReview']),
+            ...mapActions('tooltip', ["handleTooltip"]),
             async removeCurrentReview() {
                 try {
                     await this.removeReview(this.review.id);
+                    this.handleTooltip({
+                        type: "success",
+                        text: "Отзыв удален"
+                    })
                 } catch (error) {
-                    console.log(error)
+                    this.handleTooltip({
+                        type: "error",
+                        text: "error.message"
+                    })
                 }
             },
             getAbsoluteImgPath(imgPath) {
