@@ -35,9 +35,12 @@
                     ).auth__input.auth__input--password
 
 
-                    button.auth__submit(
+                    button.auth__submit(v-if="disable"
                     type="submit"
-                    :disable="disable"
+                    disable="true"
+                    ) Отправить
+                    button.auth__submit(v-else
+                    type="submit"
                     ) Отправить
 
 </template>
@@ -57,20 +60,25 @@
                     name: "",
                     password: "",
                 },
-                disable: true
+                disable: false
             }
         },
         methods: {
             ...mapActions('user', ['login']),
+            ...mapActions('tooltip', ["handleTooltip"]),
             async auth () {
-                if(!this.checkForm()) return;
+                if(!this.checkForm()) {
+                    this.disable = true;
+                    return}
                 this.disable = false;
                 try {
                     await this.login(this.user);
                    this.$router.replace('/');
                } catch (error) {
-                    console.log(error);
-                    this.disable = true;
+                    this.handleTooltip({
+                        type: "error",
+                        text: error.message
+                    })
                }
             },
             checkForm () {

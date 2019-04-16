@@ -1,6 +1,6 @@
 const shared = {
-    host: 'localhost',
-    port: 4444,
+    host: '127.0.0.1',
+    port: 8000,
     path: '/wd/hub',
     coloredLogs: true,
     screenshotPath: './errorShots/',
@@ -22,16 +22,7 @@ exports.chrome = {
     desiredCapabilities: {
         browserName: 'chrome',
         chromeOptions: {
-            args: ["disable-gpu", 'no-sandbox', 'disable-setuid-sandbox', 'incognito', 'disable-dev-shm-usage']
-        }
-    }
-};
-
-exports.opera = {
-    ...shared,
-    desiredCapabilities: {
-        browserName: 'opera',
-        operaOptions: {
+            binary: "C:/Program Files (x86)/Google/Chrome Beta/Application/chrome.exe",
             args: ["disable-gpu", 'no-sandbox', 'disable-setuid-sandbox', 'incognito', 'disable-dev-shm-usage']
         }
     }
