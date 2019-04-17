@@ -5,6 +5,7 @@ script(type="text/x-template")#slider-container
             :currentWork="currentWork",
             :currentIndex="currentIndex",
             @slide="handleSlide",
+            @change="handleChangeIndex"
         )
         info(
             :currentWork="currentWork"
@@ -12,7 +13,7 @@ script(type="text/x-template")#slider-container
 
 script(type="text/x-template")#slider-display
     .work__appearance(
-    :data-slide="currentIndex + 1")
+    :data-slide="currentWork.index + 1")
         .gallery-slider.work__slider
             .gallery-slider__content
                 ul.gallery-slider__list
@@ -24,10 +25,10 @@ script(type="text/x-template")#slider-display
                 thumbs(
                     :works="works",
                     :currentWork="currentWork",
+                    @changeIndex="index=>$emit('change', index)"
                 )
             controls(
-                :currentIndex="currentIndex",
-                :currentWork="currentWork",
+
                 @slide="direction => $emit('slide', direction)"
             )
 
@@ -37,6 +38,7 @@ script(type="text/x-template")#slider-thumbs
             li.thumbnail__item(
             v-for="(work, ndx) in works"
             :key="work.id"
+            @click="$emit('changeIndex', ndx)"
             :style="{'backgroundImage': `url(${work.photo})`}")
 
 script(type="text/x-template")#slider-btns

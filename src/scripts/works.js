@@ -74,11 +74,12 @@ new Vue({
         }
     },
     methods: {
-        makeArrWithRequiredPathImages(data) {
+        makeArrWithRequiredPathImagesAndIndex(data) {
             const baseUrl = axios.defaults.baseURL;
-            return data.map(item => {
+            return data.map((item, index) => {
                 const requiredPic = `${baseUrl}/${item.photo}`;
                 item.photo = requiredPic;
+                item.index = index;
 
                 return item;
             });
@@ -94,6 +95,10 @@ new Vue({
                     this.works.push(firstSlide);
                     break;
             }
+        },
+        handleChangeIndex(index) {
+            const arr = this.works.splice(0, index);
+            this.works = [...this.works, ...arr];
         },
 
         async fetchWorks() {
@@ -115,7 +120,7 @@ new Vue({
         } catch (error) {
             console.log('error on load works');
         }
-        this.works = this.makeArrWithRequiredPathImages(this.works);
+        this.works = this.makeArrWithRequiredPathImagesAndIndex(this.works);
     }
 
 });
