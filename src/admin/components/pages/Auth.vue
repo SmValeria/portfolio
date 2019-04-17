@@ -109,9 +109,6 @@
                 window.location.replace(rootPath);
 
             }
-        },
-        created() {
-            this.disable = true;
         }
     }
 </script>
