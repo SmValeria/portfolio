@@ -5,7 +5,7 @@
                 form.auth__container(
                 action=""
                 method=""
-                @submit="auth"
+                @submit.prevent="auth"
                 novalidate="true"
                 )
                     AuthCloseBtn(
