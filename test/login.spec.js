@@ -59,7 +59,7 @@ test('Кнопка "Отправить" заблокирована до тех �
     return client
         .click('.auth__submit')
         .pause(500)
-        .getAttribute('.auth__submit', 'disable')
+        .getAttribute('.auth__submit', 'disabled')
         .then(browsers => {
             for (const browserName in browsers) {
                 expect(browsers[browserName]).toBe("true");
@@ -73,7 +73,7 @@ test('Кнопка "Отправить" заблокирована до тех �
         })
         .addValue('#login', 'test')
         .pause(500)
-        .getAttribute('.auth__submit', 'disable')
+        .getAttribute('.auth__submit', 'disabled')
         .then(browsers => {
             for (const browserName in browsers) {
                 expect(browsers[browserName]).toBe("true");
@@ -87,10 +87,10 @@ test('Кнопка "Отправить" заблокирована до тех �
         })
         .addValue('#password', 'test')
         .pause(500)
-        .getAttribute('.auth__submit', 'disable')
+        .getAttribute('.auth__submit', 'disabled')
         .then(browsers => {
             for (const browserName in browsers) {
-                expect(browsers[browserName]).toBe("");
+                expect(browsers[browserName]).toBe(null);
             }
         })
         .screenshot()

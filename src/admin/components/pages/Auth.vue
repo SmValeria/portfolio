@@ -17,7 +17,7 @@
                     name="login"
                     id="login"
                     label="Логин"
-                    v-model="user.name"
+                    v-model.lazy="user.name"
                     error="Введите логин"
                     @focus="addActiveClassInput"
                     @blur="removeActiveClassInput"
@@ -28,20 +28,18 @@
                     name="password"
                     id="password"
                     label="Пароль"
-                    v-model="user.password"
+                    v-model.lazy="user.password"
                     error="Введите пароль"
                     @focus="addActiveClassInput"
                     @blur="removeActiveClassInput"
                     ).auth__input.auth__input--password
 
 
-                    button.auth__submit(v-if="disable"
+                    button.auth__submit(
                     type="submit"
-                    disable="true"
+                    :disabled="disable"
                     ) Отправить
-                    button.auth__submit(v-else
-                    type="submit"
-                    ) Отправить
+
 
 </template>
 
@@ -59,8 +57,13 @@
                 user: {
                     name: "",
                     password: "",
-                },
-                disable: false
+                }
+            }
+        },
+        computed: {
+            disable: function() {
+                return !(this.user.name !== "" && this.user.password !== "")
+
             }
         },
         methods: {
@@ -68,9 +71,7 @@
             ...mapActions('tooltip', ["handleTooltip"]),
             async auth () {
                 if(!this.checkForm()) {
-                    this.disable = true;
                     return}
-                this.disable = false;
                 try {
                     await this.login(this.user);
                    this.$router.replace('/');
@@ -108,6 +109,9 @@
                 window.location.replace(rootPath);
 
             }
+        },
+        created() {
+            this.disable = true;
         }
     }
 </script>
