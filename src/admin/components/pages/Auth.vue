@@ -5,7 +5,7 @@
                 form.auth__container(
                 action=""
                 method=""
-                @submit.prevent="auth"
+                @submit="auth"
                 novalidate="true"
                 )
                     AuthCloseBtn(
@@ -63,7 +63,6 @@
         computed: {
             disable: function() {
                 return !(this.user.name !== "" && this.user.password !== "")
-
             }
         },
         methods: {
