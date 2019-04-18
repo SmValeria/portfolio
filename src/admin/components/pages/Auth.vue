@@ -21,6 +21,7 @@
                     error="Введите логин"
                     @focus="addActiveClassInput"
                     @blur="removeActiveClassInput"
+                    :class="{active: loginActive}"
                     ).auth__input.auth__input--login
 
                     AuthInput(
@@ -32,6 +33,7 @@
                     error="Введите пароль"
                     @focus="addActiveClassInput"
                     @blur="removeActiveClassInput"
+                    :class="{active: passwordActive}"
                     ).auth__input.auth__input--password
 
 
@@ -55,15 +57,21 @@
         data() {
             return {
                 user: {
-                    name: "",
-                    password: "",
+                    name: "lsmirnova032019",
+                    password: "1029384756",
                 }
             }
         },
         computed: {
             disable: function() {
                 return !(this.user.name !== "" && this.user.password !== "")
-            }
+            },
+            loginActive: function() {
+                return (this.user.name !== "")
+            },
+            passwordActive: function() {
+                return (this.user.password !== "")
+            },
         },
         methods: {
             ...mapActions('user', ['login']),
@@ -103,7 +111,7 @@
                 }
             },
             toMain() {
-                const rootPath = location.protocol + '//' + location.host;
+                const rootPath = location.protocol + '//' + location.host + '/portfolio/';
 
                 window.location.replace(rootPath);
 

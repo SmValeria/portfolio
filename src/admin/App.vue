@@ -12,7 +12,8 @@
                         :title="title"
                         )
                         .page__maincontent
-                            router-view
+                            transition(name="page" mode="out-in")
+                                router-view
         transition(name="show-tooltip")
             Tooltip.tooltip(v-if="show")
 

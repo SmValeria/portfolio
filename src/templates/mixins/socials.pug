@@ -3,6 +3,6 @@ mixin socials(className, arr)
         ul(class=`social__list`)
             each icon in arr
                 li(class=`social__item`)
-                    a(href=icon.link class=`social__link`)
+                    a(href=icon.link class=`social__link` target="_blank")
                         +icon(icon.title, `social__icon social__icon--${icon.title}`)
                         span.hidden=icon

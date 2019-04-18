@@ -15,3 +15,16 @@
 .page__maincontent {
     padding: 60px 0;
 }
+
+.page-enter-active, .page-leave-active {
+    transition: opacity 0.7s, transform 0.7s;
+}
+
+.page-enter {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+.page-leave-to {
+    opacity: 0;
+    transform: translateX(100%);
+}

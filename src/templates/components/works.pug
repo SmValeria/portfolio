@@ -12,11 +12,10 @@ script(type="text/x-template")#slider-container
         )
 
 script(type="text/x-template")#slider-display
-    .work__appearance(
-    :data-slide="currentWork.index + 1")
+    .work__appearance
         .gallery-slider.work__slider
             .gallery-slider__content
-                ul.gallery-slider__list
+                ul(class="gallery-slider__list")
                     li.gallery-slider__item(
                     v-for="work in works"
                     :key="work.id"
@@ -31,7 +30,8 @@ script(type="text/x-template")#slider-display
 
                 @slide="direction => $emit('slide', direction)"
             )
-
+        transition(name="work-info" mode="out-in")
+            .index.work__index(:key="currentWork.index") {{ currentWork.index + 1 }}
 script(type="text/x-template")#slider-thumbs
     .thumbnail
         transition-group(name="slide" tag="ul").thumbnail__list
@@ -56,16 +56,17 @@ script(type="text/x-template")#slider-btns
 
 script(type="text/x-template")#slider-info
     .work__info
-        .work__describe
-            tags(
-                :tagsArray="tagsArray"
-            )
-            .work__title.subtitle {{ currentWork.title }}
-            .work__desc
-                p {{ currentWork.description }}
-            .work__link
-                +icon('link', 'work__link-icon')
-                a.work__ref(:href="currentWork.link") Посмотреть сайт
+        transition(name="work-info" mode="out-in")
+            .work__describe(:key="currentWork.index")
+                tags(
+                    :tagsArray="tagsArray"
+                )
+                .work__title.subtitle {{ currentWork.title }}
+                .work__desc
+                    p {{ currentWork.description }}
+                .work__link
+                    +icon('link', 'work__link-icon')
+                    a.work__ref(:href="currentWork.link" target="_blank") Посмотреть сайт
 
 script(type="text/x-template")#slider-tags
     div.tags.work__skills

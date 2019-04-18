@@ -130,3 +130,30 @@
 .work__skills {
     margin-bottom: 30px;
 }
+
+.work-info-enter-active, .work-info-leave-active {
+    transition: opacity .3s;
+}
+.work-info-enter, .work-info-leave-to {
+    opacity: 0;
+}
+
+.work__index {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    z-index: -1;
+    transform: translateY(-50%);
+    color: rgba($text-color, 0.05);
+    font-size: 400px;
+    line-height: 0;
+    font-weight: 800;
+
+    @include tablets {
+        right: -10%;
+    }
+
+    @include phones {
+        display: none;
+    }
+}
