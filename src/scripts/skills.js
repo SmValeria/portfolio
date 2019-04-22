@@ -17,8 +17,13 @@ const skill = {
                     .getPropertyValue("stroke-dasharray")
             );
             const percent = (dashArray / 100) * (100 - this.skillValue);
-
-            circle.style.strokeDashoffset = percent;
+            window.addEventListener('scroll', () => {
+                let offset = window.pageYOffset;
+                let topSkillsContainer = this.$root.$refs["skill-container"].getBoundingClientRect().top + offset - 150;
+                if (offset >= topSkillsContainer) {
+                    circle.style.strokeDashoffset = percent;
+                }
+            });
         }
     },
     mounted() {

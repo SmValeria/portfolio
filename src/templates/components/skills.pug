@@ -1,5 +1,5 @@
 script(type="text/x-template")#skills-list
-    div(class='skills')
+    div(class='skills' ref="skill-container")
         ul.skills__list
                 li.skills__item(v-for="category in categories"
                 :key="category.categoryGroup")

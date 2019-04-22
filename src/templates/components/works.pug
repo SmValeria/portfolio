@@ -1,5 +1,5 @@
 script(type="text/x-template")#slider-container
-    .work__content(v-if="Object.keys(works).length > 0")
+    .work__content(v-if="render")
         display(
             :works="works",
             :currentWork="currentWork",

@@ -21,6 +21,7 @@ new Vue({
                 wrapAround: true,
                 groupCells: true,
                 resize: true,
+                render: false
             }
         }
     },
@@ -61,5 +62,6 @@ new Vue({
             console.log('error on load works');
         }
         this.reviews = this.makeArrWithRequiredPathImages(this.reviews);
+        this.render = true;
     }
 });

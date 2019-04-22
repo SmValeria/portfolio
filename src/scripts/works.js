@@ -65,7 +65,8 @@ new Vue({
     data(){
         return {
             works: [],
-            currentIndex: 0
+            currentIndex: 0,
+            render: false
         }
     },
     computed: {
@@ -121,6 +122,7 @@ new Vue({
             console.log('error on load works');
         }
         this.works = this.makeArrWithRequiredPathImagesAndIndex(this.works);
+        this.render = true;
     }
 
 });
