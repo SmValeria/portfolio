@@ -40,6 +40,6 @@
         })
     }
 
-    document.addEventListener("DOMContentLoaded", stickyHeader)
+    document.addEventListener("DOMContentLoaded", stickyHeader);
 })();
 
