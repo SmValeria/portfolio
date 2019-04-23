@@ -42,18 +42,16 @@
 
     &:nth-of-type(3) {
         .parallax-hero__img {
-            left: 50%;
+            left: 100%;
             top: 32%;
-            margin-left: 12%;
             @include desktop {
-                left: initial;
-                right: 0;
-                margin-left: 0;
                 max-width: 170px;
             }
 
             @include phones {
                 top: 22%;
+                right: 0;
+                left: initial;
             }
         }
     }
@@ -126,5 +124,22 @@
                 height: 75%;
             }
         }
+    }
+}
+
+
+.parallax-hero__animation {
+    animation: 120s move infinite linear;
+    @include phones {
+        animation: none;
+    }
+}
+
+@keyframes move {
+    from {
+        transform: translate(0, 0);
+    }
+    to {
+        transform: translate(-120vw, -140%);
     }
 }

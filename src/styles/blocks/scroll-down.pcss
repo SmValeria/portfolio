@@ -1,6 +1,7 @@
 .scroll-down__link {
   display: flex;
   align-items: center;
+  animation: 0.7s pulse infinite alternate;
   &:hover {
     .scroll-down__text {
       color: $main-color;
@@ -21,4 +22,13 @@
   height: 30px;
   fill: $text-color;
   transition: fill 0.2s;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
 }
