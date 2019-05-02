@@ -15,13 +15,13 @@ new Vue({
     data() {
         return {
             reviews: [],
+            render: false,
             flickityOptions: {
                 prevNextButtons: false,
                 pageDots: false,
                 wrapAround: true,
                 groupCells: true,
                 resize: true,
-                render: false
             }
         }
     },

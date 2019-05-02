@@ -86,14 +86,16 @@
             max-width: none;
             top: 35%;
             left: -30%;
-
-            @include desktop {
-                left: -50%;
+            @include desktopHd {
+                max-width: 100%;
+                left: -20%;
             }
             @include w1050 {
-                left: -75%;
+                top: 45%;
+                left: -25%;
             }
             @include tablets {
+                max-width: none;
                 top: 30%;
                 left: -120%;
             }
@@ -110,7 +112,7 @@
             display: inline-flex;
             max-width: none;
             width: 100%;
-            height: 50%;
+            height: 55%;
 
             @include desktop {
                 width: auto;

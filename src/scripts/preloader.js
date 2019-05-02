@@ -6,6 +6,7 @@
             setTimeout(() => {
                 if(!preloader.classList.contains('loaded')){
                     preloader.classList.add('loaded');
+                    preloader.closest('.loading').classList.remove('loading');
                 }
                 resolve();
             },3000)

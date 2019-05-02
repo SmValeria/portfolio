@@ -1,5 +1,5 @@
 script(type="text/x-template")#reviews-container
-    .reviews__content(v-if="Object.keys(reviews).length > 0")
+    .reviews__content(v-if="render")
         .controls(class="reviews__controls round horizontal")
             .controls__item.controls__item--prev
                 button.controls__link(

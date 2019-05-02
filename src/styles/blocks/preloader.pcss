@@ -2,7 +2,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
     z-index: 50;
     transition: transform 1s;
     opacity: 1;
@@ -21,7 +20,6 @@
     border-radius: 50%;
     border: 3px solid transparent;
     border-top-color: #383bcf;
-    -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
 
     &::before {
@@ -34,7 +32,6 @@
         border-radius: 50%;
         border: 3px solid transparent;
         border-top-color: #8f00ef;
-        -webkit-animation: spin 3s linear infinite;
         animation: spin 3s linear infinite;
     }
 
@@ -48,16 +45,8 @@
         border-radius: 50%;
         border: 3px solid transparent;
         border-top-color: #5500f2;
-        -webkit-animation: spin 1.5s linear infinite;
         animation: spin 1.5s linear infinite;
     }
-}
-
-.preloader__percent {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 }
 
 @keyframes spin {
