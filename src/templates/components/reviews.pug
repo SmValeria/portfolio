@@ -1,5 +1,5 @@
 script(type="text/x-template")#reviews-container
-    .reviews__content
+    .reviews__content(v-if="render")
         .controls(class="reviews__controls round horizontal")
             .controls__item.controls__item--prev
                 button.controls__link(
@@ -15,15 +15,15 @@ script(type="text/x-template")#reviews-container
             flickity(ref='flickity', :options='flickityOptions').carousel__list
                 div.carousel__item.quote(
                     v-for="review in reviews"
-                    :key="review.item"
+                    :key="review.id"
                 )
-                    .carousel__text {{review.quote}}
+                    .carousel__text {{review.text}}
                     .carousel__desc.user
                         .user__photo-wr.carousel__user-photo-wr
                             .user__photo.carousel__user-photo(
-                                :style="{ backgroundImage: review.photo }"
+                                :style="{ 'backgroundImage': `url(${review.photo})` }"
                                 style="background-position: top center"
                             )
                         .carousel__info
-                            .user__name.carousel__author {{review.name}}
-                            .user__occ.carousel__occ {{review.occupation}}
+                            .user__name.carousel__author {{review.author}}
+                            .user__occ.carousel__occ {{review.occ}}

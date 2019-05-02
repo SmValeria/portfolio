@@ -1,59 +1,57 @@
 <template lang="pug">
     .admin
-        .admin__content
-            Header
-            Nav(
-            :active="activeTab"
-            :menu="menu")
-            .page
-                .page__container.container
-                    PageTitle(
-                    :title="activeTabTitle"
-                    )
-                    .page__maincontent
-                        About
-                        Works
-                        Reviews
-        Auth
+        template(v-if="$route.meta.public")
+            Auth
+        template(v-else-if="userIsLogged")
+            .admin__content
+                Header
+                Nav
+                .page
+                    .page__container.container
+                        PageTitle(
+                        :title="title"
+                        )
+                        .page__maincontent
+                            transition(name="page" mode="out-in")
+                                router-view
+        transition(name="show-tooltip")
+            Tooltip.tooltip(v-if="show")
+
+
 </template>
 <script>
-    import Auth from './components/Auth'
-    import Header from './components/Header'
-    import Nav from './components/Nav'
-    import PageTitle from './components/PageTitle'
-    import About from './components/About'
-    import Works from './components/Works'
-    import Reviews from './components/Reviews'
+
+    import { mapGetters, mapState, mapActions } from 'vuex';
 
     export default {
         data() {
             return {
-                activeTab: 'about',
-                activeTabTitle: 'Обо мне',
-                menu: [
-                    {
-                        value: 'about',
-                        title: 'Обо мне'
-                    },
-                    {
-                        value: 'works',
-                        title: 'Работы'
-                    },
-                    {
-                        value: 'reviews',
-                        title: 'Отзывы'
-                    }
-                ]
+                title: ''
             }
         },
         components: {
-            Auth,
-            Header,
-            Nav,
-            PageTitle,
-            About,
-            Works,
-            Reviews
+            Auth: () => import("./components/pages/Auth"),
+            Header: () => import("./components/Header"),
+            Nav: () => import("./components/Nav"),
+            PageTitle: () => import("./components/PageTitle"),
+            About: () => import("./components/pages/About"),
+            Works: () => import("./components/pages/Works"),
+            Reviews: () => import("./components/pages/Reviews"),
+            Tooltip: () => import("./components/Tooltip"),
+        },
+        computed: {
+            ...mapState("tooltip", {
+                show: state => state.show
+            }),
+            ...mapGetters("user", ["userIsLogged"])
+        },
+        watch: {
+            $route: function(route) {
+                this.title = route.meta.title;
+            }
+        },
+        created() {
+            this.title = this.$route.meta.title;
         }
     }
 </script>
@@ -69,5 +67,25 @@
 
     .admin {
         background: url('../images/content/hero_bg.jpg') center top/cover no-repeat;
+    }
+
+    .admin__content {
+        display: grid;
+        min-height: 100vh;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto 1fr;
+        background-color: rgba($text-color-light, 0.9);
+    }
+    .tooltip {
+        position: fixed;
+        left: 50%;
+        bottom: 0;
+        transform: translate(-50%, 0);
+    }
+    .show-tooltip-enter-active, .show-tooltip-leave-active {
+        transition: transform 0.2s;
+    }
+    .show-tooltip-enter, .show-tooltip-leave-to {
+        transform: translate(-50%, 100%);
     }
 </style>

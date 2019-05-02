@@ -1,0 +1,59 @@
+.preloader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    transition: transform 1s;
+    opacity: 1;
+
+    &.loaded {
+        transform: translateY(-100%);
+        overflow: visible;
+    }
+}
+
+.preloader__animation {
+    display: block;
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #383bcf;
+    animation: spin 2s linear infinite;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        right: 5px;
+        bottom: 5px;
+        border-radius: 50%;
+        border: 3px solid transparent;
+        border-top-color: #8f00ef;
+        animation: spin 3s linear infinite;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        right: 15px;
+        bottom: 15px;
+        border-radius: 50%;
+        border: 3px solid transparent;
+        border-top-color: #5500f2;
+        animation: spin 1.5s linear infinite;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

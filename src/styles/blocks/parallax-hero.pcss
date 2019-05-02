@@ -42,18 +42,16 @@
 
     &:nth-of-type(3) {
         .parallax-hero__img {
-            left: 50%;
+            left: 100%;
             top: 32%;
-            margin-left: 12%;
             @include desktop {
-                left: initial;
-                right: 0;
-                margin-left: 0;
                 max-width: 170px;
             }
 
             @include phones {
                 top: 22%;
+                right: 0;
+                left: initial;
             }
         }
     }
@@ -88,14 +86,16 @@
             max-width: none;
             top: 35%;
             left: -30%;
-
-            @include desktop {
-                left: -50%;
+            @include desktopHd {
+                max-width: 100%;
+                left: -20%;
             }
             @include w1050 {
-                left: -75%;
+                top: 45%;
+                left: -25%;
             }
             @include tablets {
+                max-width: none;
                 top: 30%;
                 left: -120%;
             }
@@ -112,7 +112,7 @@
             display: inline-flex;
             max-width: none;
             width: 100%;
-            height: 50%;
+            height: 55%;
 
             @include desktop {
                 width: auto;
@@ -126,5 +126,22 @@
                 height: 75%;
             }
         }
+    }
+}
+
+
+.parallax-hero__animation {
+    animation: 120s move infinite linear;
+    @include phones {
+        animation: none;
+    }
+}
+
+@keyframes move {
+    from {
+        transform: translate(0, 0);
+    }
+    to {
+        transform: translate(-120vw, -140%);
     }
 }

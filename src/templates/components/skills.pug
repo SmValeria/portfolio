@@ -1,21 +1,22 @@
 script(type="text/x-template")#skills-list
-    div(class='skills')
+    div(class='skills' ref="skill-container")
         ul.skills__list
-                li.skills__item(v-for="skill in skills"
-                :key="skill.skillsGroup")
+                li.skills__item(v-for="category in categories"
+                :key="category.categoryGroup")
                     skills-row(
-                        :skill="skill"
+                        :category="category"
+                        :skills = "filterSkillsByCategoryId(category.id)"
                     )
 
 
 script(type="text/x-template")#skills-row
     div.skills__item-container
-        h4.skills__title {{skill.skillsGroup}}
+        h4.skills__title {{ category.category }}
         ul.skills__row
-                li.skills__row-item(v-for="(skillValue, skillName) in skill.skills")
+                li.skills__row-item(v-for="skill in skills")
                     skill(
-                        :skillName="skillName"
-                        :skillValue="skillValue"
+                        :skillName="skill.title"
+                        :skillValue="skill.percent"
                     )
 
 script(type="text/x-template")#skill

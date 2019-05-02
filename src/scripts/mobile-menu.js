@@ -12,11 +12,9 @@
 
             if(evt.target === closeMobileMenuButton ||
                 evt.target.closest('.hamburger')) {
-                console.log(evt.target);
                 mobileMenu.classList.remove('active');
             }
             if(evt.target.closest('.menu__item')) {
-                console.log(evt.target);
                 mobileMenu.classList.remove('active');
             }
 

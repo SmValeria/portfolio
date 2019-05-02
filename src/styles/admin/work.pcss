@@ -9,6 +9,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 30px;
+    max-width: 100%;
     @include tablets {
         grid-template-columns: 1fr;
     }
@@ -25,6 +26,7 @@
     border: 1px solid #a1a1a1;
     background-color: #dee4ed;
     text-align: center;
+    position: relative;
     @include tablets {
         width: 70%;
         margin: 0 auto;
@@ -35,9 +37,17 @@
     @include phones {
         width: 100%;
     }
+
+    &.filled {
+        background: center center/cover no-repeat;
+        margin-bottom: 30px;
+    }
 }
 
 
+.work__file-box-upload {
+    text-align: center;
+}
 .work__row {
     margin-bottom: 20px;
     &:last-of-type {
@@ -62,7 +72,11 @@
         margin-right: 20px;
     }
 }
-
+.work__input {
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+}
 .work__lists {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -100,15 +114,27 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    padding: 0;
 }
 
 .work__bg-img {
     background-repeat: no-repeat;
     background-size: 100% auto;
     background-position: center top;
-    padding-top: 75%;
+    padding-top: 62%;
+    position: relative;
+    margin-bottom: 25px;
 }
 
+.work__description {
+    padding: 30px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.work__data {
+    flex-grow: 1;
+}
 .work__header {
     margin-bottom: 25px;
 }
@@ -124,12 +150,14 @@
     color: #383bcf;
     font-weight: 600;
     margin-bottom: 40px;
+    word-break: break-all;
 }
 
 .work__controls {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: auto;
 }
 
 .work__overlay {
@@ -147,4 +175,25 @@
     .work__overlay {
         height: 100%;
     }
+}
+
+.work__tags {
+    position: absolute;
+    bottom: 3%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap-reverse;
+    flex-direction: row;
+    justify-content: flex-end;
+
+}
+
+.work__tags-item {
+    background-color: $text-color-light;
+    font-weight: 600;
+    padding: 5px 10px;
+    &:last-of-type {
+        margin-right: 10px;
+    }
+
 }

@@ -6,17 +6,33 @@
                     .user__photo
                 .header__user-info
                     .user__name.header__user-name Валерия Смирнова
-                        ExitBtn(class="header__btn--phone")
+                        ExitBtn(
+                        @click.native="authOut"
+                        class="header__btn--phone")
             .header__title Панель администрирования
-            ExitBtn(class="header__btn--desktop")
+            ExitBtn(
+            @click.native="authOut"
+            class="header__btn--desktop")
 </template>
 
 <script>
-    import ExitBtn from './ExitBtn'
+    import { mapActions } from 'vuex';
+
     export default {
         name: "Header",
         components: {
-            ExitBtn
+            ExitBtn: () => import('./ExitBtn'),
+        },
+        methods: {
+            ...mapActions('user', ['logout']),
+            async authOut () {
+                try {
+                    await this.logout();
+                    this.$router.replace('/login');
+                } catch (error) {
+                    console.log(error);
+                }
+            },
         }
     }
 

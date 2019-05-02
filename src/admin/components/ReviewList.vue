@@ -1,97 +1,55 @@
 <template lang="pug">
     ul.review__lists
         li.review__item
-            AddItem Добавить
+            AddItem(
+            @click.native="$emit('addNewReview')"
+            :disabled="isFormShow"
+            ) Добавить
                 br
                 |отзыв
-        li.review__item.card
-            header.card__header.review__header
-                .user.review__writer
-                    .user__photo-wr.review__img-photo-wr
-                        .user__photo.review__img-photo(
-                            style="background: url('src/images/content/sabancev.jpg') center top/cover no-repeat"
-                        )
-                    .user__info.review__author-info
-                        .user__name.review__author-name Владимир Сабанцев
-                        .user__occ Преподаватель
-            .review__content
-                .review__text
-                    p Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах
-                .review__controls
-                    button(
-                    type="button"
-                    ).card__edit.icon__pencil.review__edit.review__btn Править
-                    button(
-                    type="button"
-                    ).card__delete.icon__delete.review__delete.review__btn Удалить
-        li.review__item.card
-            header.card__header.review__header
-                .user.review__writer
-                    .user__photo-wr.review__img-photo-wr
-                        .user__photo.review__img-photo(
-                            style="background: url('src/images/content/kovalchuk.jpg') center top/cover no-repeat"
-                        )
-                    .user__info.review__author-info
-                        .user__name.review__author-name Ковальчук Дмитрий
-                        .user__occ Основатель Loftschool
-            .review__content
-                .review__text
-                    p Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
-                .review__controls
-                    button(
-                    type="button"
-                    ).card__edit.icon__pencil.review__edit.review__btn Править
-                    button(
-                    type="button"
-                    ).card__delete.icon__delete.review__delete.review__btn Удалить
-        li.review__item.card
-            header.card__header.review__header
-                .user.review__writer
-                    .user__photo-wr.review__img-photo-wr
-                        .user__photo.review__img-photo(
-                            style="background: url('src/images/content/sabancev.jpg') center top/cover no-repeat"
-                        )
-                    .user__info.review__author-info
-                        .user__name.review__author-name Владимир Сабанцев
-                        .user__occ Преподаватель
-            .review__content
-                .review__text
-                    p Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах
-                .review__controls
-                    button(
-                    type="button"
-                    ).card__edit.icon__pencil.review__edit.review__btn Править
-                    button(
-                    type="button"
-                    ).card__delete.icon__delete.review__delete.review__btn Удалить
-        li.review__item.card
-            header.card__header.review__header
-                .user.review__writer
-                    .user__photo-wr.review__img-photo-wr
-                        .user__photo.review__img-photo(
-                            style="background: url('src/images/content/kovalchuk.jpg') center top/cover no-repeat"
-                        )
-                    .user__info.review__author-info
-                        .user__name.review__author-name Ковальчук Дмитрий
-                        .user__occ Основатель Loftschool
-            .review__content
-                .review__text
-                    p Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
-                .review__controls
-                    button(
-                    type="button"
-                    ).card__edit.icon__pencil.review__edit.review__btn Править
-                    button(
-                    type="button"
-                    ).card__delete.icon__delete.review__delete.review__btn Удалить
+        ReviewItem(
+        v-for="review in reviews"
+        :key="review.id"
+        :review="review"
+        @editCurrentReview="editReview"
+        :isFormShow="isFormShow"
+        :class="{edit: isFormShow && editReviewId === review.id}"
+        )
 </template>
 
 <script>
-    import AddItem from './AddItem'
+
+    import { mapActions, mapState } from "vuex";
+
     export default {
         name: "ReviewList",
+        props: {
+            isFormShow: Boolean,
+            editReviewId: {
+                validator: prop => typeof prop === 'number' || prop === null
+            }
+        },
         components: {
-            AddItem
+            ReviewItem: () => import("./ReviewItem"),
+            AddItem: () => import("./AddItem"),
+        },
+        computed: {
+            ...mapState('reviews', {
+                reviews: state => state.reviews,
+            }),
+        },
+        methods: {
+            ...mapActions('reviews', ['fetchReviews']),
+            editReview(editedReview) {
+                this.$emit('editReview', editedReview)
+            }
+        },
+        async created() {
+            try {
+                await this.fetchReviews();
+            } catch (error) {
+                console.log('error on load reviews');
+            }
         }
     }
 </script>

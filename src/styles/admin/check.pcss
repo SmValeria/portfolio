@@ -1,0 +1,35 @@
+.check {
+    position: relative;
+}
+
+.check__error {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #cd1515;
+    color: $text-color-light;
+    padding: 15px 20px;
+    text-align: center;
+    z-index: 1;
+    font-weight: 400;
+
+
+    &::before {
+        content: '';
+        display: flex;
+        width: 0;
+        height: 0;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -100%);
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 7px solid #cd1515;
+    }
+}
+.error .check__error {
+    display: block;
+}

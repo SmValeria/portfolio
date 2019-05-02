@@ -117,8 +117,8 @@ module.exports = (env, argv) => {
 
   const config = {
     entry: {
-      main: "./src/main.js",
-      admin: "./src/admin/main.js"
+      main: ["@babel/polyfill", "./src/main.js"],
+      admin: ["@babel/polyfill", "./src/admin/main.js"]
     },
     output: {
       path: path.resolve(__dirname, "./docs"),
@@ -133,7 +133,9 @@ module.exports = (env, argv) => {
       alias: {
         vue$: "vue/dist/vue.esm.js",
         images: path.resolve(__dirname, "src/images"),
-        fonts: path.resolve(__dirname, "src/fonts")
+        fonts: path.resolve(__dirname, "src/fonts"),
+        components: path.resolve(__dirname, "src/admin/components"),
+        "@": path.resolve(__dirname, "src/admin")
       },
       extensions: ["*", ".js", ".vue", ".json"]
     },

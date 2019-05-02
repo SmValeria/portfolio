@@ -3,21 +3,34 @@
         .nav__container.container
             nav.nav__content
                 ul.nav__list
-                    li(v-for="item in menu"
+                    router-link(v-for="item in menu"
+                    tag="li"
                     class="nav__item"
-                    :class="active === item.value ? 'active' : ''")
-                        a.nav__link(href="#") {{item.title}}
+                    :to="item.value"
+                    :key="item.id"
+                    exact-active-class="active")
+                        a.nav__link(href="#") {{ item.title }}
 </template>
 
 <script>
     export default {
         name: "Nav",
-        props: {
-            active: String,
-            menu: Array
-        },
         data() {
             return {
+                menu: [
+                    {
+                        value: '/',
+                        title: 'Обо мне'
+                    },
+                    {
+                        value: '/works',
+                        title: 'Работы'
+                    },
+                    {
+                        value: '/reviews',
+                        title: 'Отзывы'
+                    }
+                ]
             }
         }
     }

@@ -1,5 +1,6 @@
 <template lang="pug">
-    header(class="page__title") Блок «{{ title }}»
+    transition(name="title" mode="out-in")
+        header(class="page__title" :key="title") Блок «{{ title }}»
 </template>
 
 <script>
@@ -12,5 +13,10 @@
 </script>
 
 <style scoped>
-
+    .title-enter-active, .title-leave-active {
+        transition: opacity .4s;
+    }
+    .title-enter, .title-leave-to {
+        opacity: 0;
+    }
 </style>

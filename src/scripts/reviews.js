@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import Flickity from 'vue-flickity';
 
+import axios from 'axios';
+
+axios.defaults.baseURL = 'https://webdev-api.loftschool.com';
+
 new Vue({
     el: "#reviews-component",
     template: "#reviews-container",
@@ -11,6 +15,7 @@ new Vue({
     data() {
         return {
             reviews: [],
+            render: false,
             flickityOptions: {
                 prevNextButtons: false,
                 pageDots: false,
@@ -29,15 +34,34 @@ new Vue({
             this.$refs.flickity.previous();
         },
         makeArrWithRequiredPathImages(data) {
+            const baseUrl = axios.defaults.baseURL;
             return data.map(item => {
-                const requiredPic = require(`../images/content/${item.photo}`);
-                item.photo = 'url( \"' + requiredPic + '\")';
+                const requiredPic = `${baseUrl}/${item.photo}`;
+                item.photo = requiredPic;
+
                 return item;
             });
         },
+        async fetchReviews() {
+            try {
+                const response = await axios.get('/reviews/117');
+                this.reviews = response.data;
+                return response;
+            } catch (error) {
+                throw new Error(
+                    error.response.data.error || error.response.data.message
+                )
+
+            }
+        },
     },
-    created() {
-        const data = require("../data/reviews.json");
-        this.reviews = this.makeArrWithRequiredPathImages(data);
+    async created() {
+        try {
+            await this.fetchReviews();
+        } catch (error) {
+            console.log('error on load works');
+        }
+        this.reviews = this.makeArrWithRequiredPathImages(this.reviews);
+        this.render = true;
     }
 });

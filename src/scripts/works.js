@@ -1,4 +1,7 @@
-import Vue from "vue"
+import Vue from "vue";
+import axios from 'axios';
+
+axios.defaults.baseURL = 'https://webdev-api.loftschool.com';
 
 const thumbs = {
     template: "#slider-thumbs",
@@ -14,7 +17,6 @@ const controls = {
         works: Array,
         currentWork: Object,
         currentIndex: Number,
-        lastIndexOfWorkArray: Number
     }
 };
 
@@ -28,15 +30,6 @@ const display = {
         works: Array,
         currentWork: Object,
         currentIndex: Number
-    },
-    computed: {
-        reverseWorks(){
-            const works = [...this.works];
-            return works.reverse();
-        },
-        lastIndexOfWorkArray() {
-            return this.works.length -1;
-        }
     }
 };
 
@@ -57,7 +50,7 @@ const info = {
     },
     computed: {
         tagsArray(){
-            return this.currentWork.skills.split(",")
+            return this.currentWork.techs.split(", ")
         }
     }
 };
@@ -72,46 +65,22 @@ new Vue({
     data(){
         return {
             works: [],
-            currentIndex: 0
+            currentIndex: 0,
+            render: false
         }
     },
     computed: {
         currentWork(){
-            return this.works[this.currentIndex]
-        }
-    },
-    watch: {
-        currentIndex(value) {
-            this.makeLimitedLoopForCurIndex(value);
+            return this.works[0]
         }
     },
     methods: {
-        reRenderThumbnails(index) {
-            const container = document.querySelector('.thumbnail');
-            const containerHeight = container.offsetHeight;
-            const list = container.querySelector('.thumbnail__list');
-            const itemHeight = list.querySelector('.thumbnail__item').offsetHeight;
-            const countVisibleItems =  (containerHeight / itemHeight) - 1;
-
-            if (index === this.works.length) return;
-            if(index <= countVisibleItems) {
-                list.style.transform = `translateY(0px)`;
-                return
-            }
-            let offset = (index - countVisibleItems) * itemHeight;
-
-            list.style.transform = `translateY(${offset}px)`;
-
-        },
-        makeLimitedLoopForCurIndex(value) {
-            const worksAmount = this.works.length - 1;
-            if (value > worksAmount) this.currentIndex = worksAmount;
-            if (value < 0) this.currentIndex = 0;
-        },
-        makeArrWithRequiredPathImages(data) {
-            return data.map(item => {
-                const requiredPic = require(`../images/${item.path}`);
-                item.path = requiredPic;
+        makeArrWithRequiredPathImagesAndIndex(data) {
+            const baseUrl = axios.defaults.baseURL;
+            return data.map((item, index) => {
+                const requiredPic = `${baseUrl}/${item.photo}`;
+                item.photo = requiredPic;
+                item.index = index;
 
                 return item;
             });
@@ -119,21 +88,41 @@ new Vue({
         handleSlide(direction) {
             switch (direction) {
                 case 'next':
-                    this.currentIndex++;
+                    const lastSlide = this.works.pop();
+                    this.works.unshift(lastSlide);
                     break;
                 case 'prev':
-                    this.currentIndex--;
+                    const firstSlide= this.works.shift();
+                    this.works.push(firstSlide);
                     break;
             }
-
-            this.reRenderThumbnails(this.currentIndex);
         },
-        setSlide(index) {
-            this.currentIndex = index;
-        }
+        handleChangeIndex(index) {
+            const arr = this.works.splice(0, index);
+            this.works = [...this.works, ...arr];
+        },
+
+        async fetchWorks() {
+            try {
+                const response = await axios.get('/works/117');
+                this.works = response.data;
+                return response;
+            } catch (error) {
+                throw new Error(
+                    error.response.data.error || error.response.data.message
+                )
+
+            }
+        },
     },
-    created() {
-        const data = require("../data/work.json");
-        this.works = this.makeArrWithRequiredPathImages(data);
+    async created() {
+        try {
+            await this.fetchWorks();
+        } catch (error) {
+            console.log('error on load works');
+        }
+        this.works = this.makeArrWithRequiredPathImagesAndIndex(this.works);
+        this.render = true;
     }
+
 });
